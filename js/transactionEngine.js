@@ -274,7 +274,7 @@ export function createAssetTransaction({
 
 
     const paymentName =
-        getPaymentAccountName(
+        getAccountName(
             paidFrom
         );
 

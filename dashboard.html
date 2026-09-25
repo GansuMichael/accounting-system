@@ -1,0 +1,151 @@
+<section class="app-section" id="dashboardSection">
+
+    <h2>Financial Dashboard</h2>
+    <div class="filter-controls">
+    <label>From<input id="dashboardFromDate" type="date"/></label>
+    <label>To<input id="dashboardToDate" type="date"/></label>
+    <button id="refreshDashboard" type="button">Refresh Dashboard</button>
+    </div>
+    <div id="dashboard"></div>
+    </section>
+
+
+    <section class="app-section" id="dashboardSection">
+
+        <h2>Financial Dashboard</h2>
+    
+        <div class="filter-controls">
+            <label>
+                From
+                <input id="dashboardFromDate" type="date">
+            </label>
+    
+            <label>
+                To
+                <input id="dashboardToDate" type="date">
+            </label>
+    
+            <button id="refreshDashboard" type="button">
+                Refresh Dashboard
+            </button>
+        </div>
+    
+        <!-- FINANCIAL POSITION -->
+        <div class="dashboard-group">
+            <h3>Financial Position</h3>
+    
+            <div class="dashboard-cards">
+    
+                <div class="dashboard-card">
+                    <span>Total Assets</span>
+                    <strong id="cardTotalAssets">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Total Liabilities</span>
+                    <strong id="cardTotalLiabilities">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Total Equity</span>
+                    <strong id="cardTotalEquity">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Cash & Bank</span>
+                    <strong id="cardCashBank">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Accounts Receivable</span>
+                    <strong id="cardReceivables">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Accounts Payable</span>
+                    <strong id="cardPayables">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Loans Payable</span>
+                    <strong id="cardLoans">0.00</strong>
+                </div>
+
+                <div class="dashboard-card">
+                    <span>Balance Sheet Status</span>
+                    <strong id="cardBalanceSheetStatus">
+                        Checking...
+                    </strong>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span>Balance Sheet Difference</span>
+                    <strong id="cardBalanceSheetDifference">
+                        0.00
+                    </strong>
+                </div>
+    
+            </div>
+        </div>
+    
+    
+        <!-- WORKING CAPITAL -->
+        <div class="dashboard-group">
+            <h3>Working Capital</h3>
+    
+            <div class="dashboard-cards">
+    
+                <div class="dashboard-card">
+                    <span>Current Assets</span>
+                    <strong id="cardCurrentAssets">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Current Liabilities</span>
+                    <strong id="cardCurrentLiabilities">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Working Capital</span>
+                    <strong id="cardWorkingCapital">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Current Ratio</span>
+                    <strong id="cardCurrentRatio">0.00</strong>
+                </div>
+    
+            </div>
+        </div>
+    
+    
+        <!-- PERFORMANCE -->
+        <div class="dashboard-group">
+            <h3>Performance</h3>
+    
+            <div class="dashboard-cards">
+    
+                <div class="dashboard-card">
+                    <span>Revenue</span>
+                    <strong id="cardRevenue">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Expenses</span>
+                    <strong id="cardExpenses">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Net Profit</span>
+                    <strong id="cardNetProfit">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Profit Margin</span>
+                    <strong id="cardProfitMargin">0.00%</strong>
+                </div>
+    
+            </div>
+        </div>
+    
+    </section>

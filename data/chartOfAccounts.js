@@ -24,7 +24,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "1003",
+        code: "1030",
         name: "Accounts Receivable",
         type: "Asset",
         normalBalance: "Debit",
@@ -71,12 +71,20 @@ export const chartOfAccounts = [
         cashFlowCategory: "Operating"
     },
 
+    {
+        code: "1040",
+        name: "Inventory",
+        type: "Asset",
+        normalBalance: "Debit",
+        cashFlowCategory: "Operating"
+    },
+
     // =====================
     // LIABILITIES (2000)
     // =====================
 
     {
-        code: "2001",
+        code: "2010",
         name: "Accounts Payable",
         type: "Liability",
         normalBalance: "Credit",
@@ -94,6 +102,14 @@ export const chartOfAccounts = [
     {
         code: "2003",
         name: "Wages Payable",
+        type: "Liability",
+        normalBalance: "Credit",
+        cashFlowCategory: "Operating"
+    },
+
+    {
+        code: "2030",
+        name: "Deferred Revenue",
         type: "Liability",
         normalBalance: "Credit",
         cashFlowCategory: "Operating"

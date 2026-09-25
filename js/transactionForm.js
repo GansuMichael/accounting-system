@@ -137,6 +137,10 @@ const dueDateGroup =
         "dueDateGroup"
     );
 
+const drawingPaymentAccountGroup =
+    document.getElementById(
+        "drawingPaymentAccountGroup"
+    );
 
 
 // ------------------------------------
@@ -252,6 +256,9 @@ function updateFormFields() {
     paymentAccountGroup.style.display =
         "none";
 
+    drawingPaymentAccountGroup.style.display =
+        "none";
+
     assetAccountGroup.style.display =
         "none";
 
@@ -347,13 +354,9 @@ function updateFormFields() {
     // OWNER DRAWING
     // --------------------------------
 
-    if (
-        type === "owner_drawing"
-    ) {
-
-        paymentAccountGroup.style.display =
+    if (type === "owner_drawing") {
+        drawingPaymentAccountGroup.style.display =
             "block";
-
     }
 
 }
@@ -451,62 +454,29 @@ form.addEventListener(
             // OWNER DRAWING
             // --------------------------------
             
-            if (
-                type === "owner_drawing"
-            ) {
-            
-                const drawingPaymentAccountElement =
+            if (type === "owner_drawing") {
+                const drawingPaymentAccount =
                     document.getElementById(
                         "drawingPaymentAccount"
-                    );
-            
-            
-                if (
-                    !drawingPaymentAccountElement
-                ) {
-            
-                    throw new Error(
-                        "Drawing payment account field was not found."
-                    );
-            
-                }
-            
-            
-                const drawingPaymentAccount =
-                    drawingPaymentAccountElement.value;
-            
+                    ).value;
             
                 if (!drawingPaymentAccount) {
-            
                     throw new Error(
                         "Select the payment account."
                     );
-            
                 }
-            
             
                 const drawingTransaction =
                     createOwnerDrawingTransaction({
-            
                         date,
-            
-                        description:
-                            transactionDescription,
-            
-                        amount:
-                            transactionAmount,
-            
-                        paidFrom:
-                            drawingPaymentAccount
-            
+                        description: transactionDescription,
+                        amount: transactionAmount,
+                        paidFrom: drawingPaymentAccount
                     });
             
-            
                 if (editingTransactionId) {
-            
                     drawingTransaction.id =
                         editingTransactionId;
-            
             
                     updateTransaction(
                         editingTransactionId,
@@ -516,9 +486,7 @@ form.addEventListener(
                     alert(
                         "Owner drawing updated successfully."
                     );
-            
                 } else {
-            
                     saveTransaction(
                         drawingTransaction
                     );
@@ -526,12 +494,9 @@ form.addEventListener(
                     alert(
                         "Owner drawing saved successfully."
                     );
-            
                 }
             
-            
                 resetForm();
-            
             
                 document.dispatchEvent(
                     new CustomEvent(
@@ -539,9 +504,7 @@ form.addEventListener(
                     )
                 );
             
-            
                 return;
-            
             }
             
             

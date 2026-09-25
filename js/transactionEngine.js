@@ -1,4 +1,5 @@
 // js/transactionEngine.js
+import { getAccountByCode } from "./accounts.js";
 
 import { createJournalEntry } from "./journal.js";
 
@@ -14,7 +15,122 @@ import {
 // ------------------------------------
 // REVENUE
 // ------------------------------------
+// ------------------------------------
+// GENERIC JOURNAL TRANSACTION
+// ------------------------------------
 
+export function createJournalTransaction({
+    date,
+    description,
+    amount,
+    debitAccount,
+    creditAccount,
+    reference = "",
+    metadata = {},
+    type = "journal"
+}) {
+    validateTransactionDate(date);
+
+    if (!date) {
+        throw new Error("Transaction date is required.");
+    }
+
+    if (!description) {
+        throw new Error("Transaction description is required.");
+    }
+
+    const transactionAmount = Number(amount);
+
+    if (
+        !Number.isFinite(transactionAmount) ||
+        transactionAmount <= 0
+    ) {
+        throw new Error(
+            "Transaction amount must be greater than zero."
+        );
+    }
+
+    if (!debitAccount) {
+        throw new Error(
+            "Debit account is required."
+        );
+    }
+
+    if (!creditAccount) {
+        throw new Error(
+            "Credit account is required."
+        );
+    }
+
+    if (debitAccount === creditAccount) {
+        throw new Error(
+            "Debit and credit accounts cannot be the same."
+        );
+    }
+
+    const debit = getAccountByCode(debitAccount);
+    const credit = getAccountByCode(creditAccount);
+
+    if (!debit) {
+        throw new Error(
+            `Debit account ${debitAccount} does not exist.`
+        );
+    }
+
+    if (!credit) {
+        throw new Error(
+            `Credit account ${creditAccount} does not exist.`
+        );
+    }
+
+    ensurePeriodOpen(date);
+
+    const journalEntry = createJournalEntry({
+        date,
+
+        description,
+
+        reference:
+            reference ||
+            `JRN-${Date.now()}`,
+
+        lines: [
+            {
+                accountCode: debit.code,
+                accountName: debit.name,
+                debit: transactionAmount,
+                credit: 0
+            },
+
+            {
+                accountCode: credit.code,
+                accountName: credit.name,
+                debit: 0,
+                credit: transactionAmount
+            }
+        ]
+    });
+
+    return {
+        ...journalEntry,
+
+        type,
+
+        amount: transactionAmount,
+
+        debitAccount: debit.code,
+        debitAccountName: debit.name,
+
+        creditAccount: credit.code,
+        creditAccountName: credit.name,
+
+        reference:
+            reference ||
+            journalEntry.reference,
+
+        metadata
+    };
+}
 // ------------------------------------
 // REVENUE
 // ------------------------------------

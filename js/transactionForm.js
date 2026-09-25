@@ -1,10 +1,14 @@
 // js/transactionForm.js
+import {
+    getTransactionRule
+} from "./transactionRules.js";
 
 import {
-    createRevenueTransaction,
-    createExpenseTransaction,
-    createAssetTransaction,
-    createOwnerDrawingTransaction
+    getAccountByCode
+} from "./accounts.js";
+
+import {
+    createJournalTransaction
 } from "./transactionEngine.js";
 
 import {
@@ -52,31 +56,23 @@ const amount =
         "amount"
     );
 
+// ------------------------------------
+// ACCOUNT ELEMENTS
+// ------------------------------------
 
 // ------------------------------------
 // ACCOUNT ELEMENTS
 // ------------------------------------
 
-const account =
+const debitAccount =
     document.getElementById(
-        "account"
+        "debitAccount"
     );
 
-const receivingAccount =
+const creditAccount =
     document.getElementById(
-        "receivingAccount"
+        "creditAccount"
     );
-
-const paymentAccount =
-    document.getElementById(
-        "paymentAccount"
-    );
-
-const assetAccount =
-    document.getElementById(
-        "assetAccount"
-    );
-
 
 // ------------------------------------
 // PARTY ELEMENTS
@@ -141,7 +137,6 @@ const drawingPaymentAccountGroup =
     document.getElementById(
         "drawingPaymentAccountGroup"
     );
-
 
 // ------------------------------------
 // EDITING
@@ -239,127 +234,195 @@ function loadSuppliers() {
 // SHOW / HIDE FIELDS
 // ------------------------------------
 
+function populateAccountSelect(selectElement, accountCodes) {
+
+    if (!selectElement) return;
+
+    selectElement.innerHTML = "";
+
+    const placeholder =
+        document.createElement("option");
+
+    placeholder.value = "";
+
+    placeholder.textContent =
+        "Select account";
+
+    selectElement.appendChild(
+        placeholder
+    );
+
+    accountCodes.forEach(accountCode => {
+
+        const account =
+            getAccountByCode(accountCode);
+
+        if (!account) return;
+
+        const option =
+            document.createElement("option");
+
+        option.value = account.code;
+
+        option.textContent =
+            `${account.code} - ${account.name}`;
+
+        selectElement.appendChild(
+            option
+        );
+    });
+}
+
+
+function updateAccountOptions() {
+
+    const type =
+        transactionType.value;
+
+    const rule =
+        getTransactionRule(type);
+
+
+    if (!rule) {
+
+        populateAccountSelect(
+            debitAccount,
+            []
+        );
+
+        populateAccountSelect(
+            creditAccount,
+            []
+        );
+
+        return;
+    }
+
+
+    populateAccountSelect(
+        debitAccount,
+        rule.debitAccounts
+    );
+
+    populateAccountSelect(
+        creditAccount,
+        rule.creditAccounts
+    );
+}
+
+
 function updateFormFields() {
 
     const type =
         transactionType.value;
 
+    // --------------------------------
+    // HIDE OPTIONAL PARTY FIELDS
+    // --------------------------------
 
-    // Hide everything first
+    if (customerGroup) {
+        customerGroup.style.display = "none";
+    }
 
-    normalAccountGroup.style.display =
-        "none";
+    if (supplierGroup) {
+        supplierGroup.style.display = "none";
+    }
 
-    receivingAccountGroup.style.display =
-        "none";
-
-    paymentAccountGroup.style.display =
-        "none";
-
-    drawingPaymentAccountGroup.style.display =
-        "none";
-
-    assetAccountGroup.style.display =
-        "none";
-
-    customerGroup.style.display =
-        "none";
-
-    supplierGroup.style.display =
-        "none";
-
-    dueDateGroup.style.display =
-        "none";
+    if (dueDateGroup) {
+        dueDateGroup.style.display = "none";
+    }
 
 
     // --------------------------------
-    // REVENUE
+    // REVENUE / CREDIT SALE
     // --------------------------------
 
-    if (type === "revenue") {
+    if (
+        type === "revenue" &&
+        debitAccount.value === "1030"
+    ) {
 
-        normalAccountGroup.style.display =
-            "block";
-
-        receivingAccountGroup.style.display =
-            "block";
-
-
-        // Customer is only needed
-        // for credit sales
-
-        if (
-            receivingAccount.value ===
-            "1030"
-        ) {
-
-            customerGroup.style.display =
-                "block";
-
-            dueDateGroup.style.display =
-                "block";
-
+        if (customerGroup) {
+            customerGroup.style.display = "";
         }
 
+        if (dueDateGroup) {
+            dueDateGroup.style.display = "";
+        }
     }
 
 
     // --------------------------------
-    // EXPENSE
+    // CUSTOMER PAYMENT
     // --------------------------------
 
-    if (type === "expense") {
+    if (
+        type === "customer_payment"
+    ) {
 
-        normalAccountGroup.style.display =
-            "block";
+        if (customerGroup) {
+            customerGroup.style.display = "";
+        }
+    }
 
-        paymentAccountGroup.style.display =
-            "block";
 
+    // --------------------------------
+    // INVENTORY PURCHASE ON CREDIT
+    // --------------------------------
 
-        // Supplier is only needed
-        // for credit purchases
+    if (
+        type === "inventory_purchase" &&
+        creditAccount.value === "2010"
+    ) {
 
-        if (
-            paymentAccount.value ===
-            "2010"
-        ) {
-
-            supplierGroup.style.display =
-                "block";
-
-            dueDateGroup.style.display =
-                "block";
-
+        if (supplierGroup) {
+            supplierGroup.style.display = "";
         }
 
+        if (dueDateGroup) {
+            dueDateGroup.style.display = "";
+        }
     }
 
 
     // --------------------------------
-    // ASSET
+    // EXPENSE ON CREDIT
     // --------------------------------
 
-    if (type === "asset") {
+    if (
+        type === "expense" &&
+        creditAccount.value === "2010"
+    ) {
 
-        assetAccountGroup.style.display =
-            "block";
+        if (supplierGroup) {
+            supplierGroup.style.display = "";
+        }
 
-        paymentAccountGroup.style.display =
-            "block";
-
+        if (dueDateGroup) {
+            dueDateGroup.style.display = "";
+        }
     }
 
+
     // --------------------------------
-    // OWNER DRAWING
+    // SUPPLIER PAYMENT
     // --------------------------------
 
-    if (type === "owner_drawing") {
-        drawingPaymentAccountGroup.style.display =
-            "block";
+    if (
+        type === "supplier_payment"
+    ) {
+
+        if (supplierGroup) {
+            supplierGroup.style.display = "";
+        }
     }
-
 }
+
+
+
+// ------------------------------------
+// TRANSACTION TYPE CHANGE
+// ------------------------------------
 
 
 // ------------------------------------
@@ -368,29 +431,53 @@ function updateFormFields() {
 
 transactionType.addEventListener(
     "change",
-    updateFormFields
+    function () {
+
+        // Transaction type determines
+        // which accounts are available.
+        updateAccountOptions();
+
+        // Then update conditional fields.
+        updateFormFields();
+    }
 );
 
 
 // ------------------------------------
-// RECEIVING ACCOUNT CHANGE
+// DEBIT ACCOUNT CHANGE
 // ------------------------------------
 
-receivingAccount.addEventListener(
+debitAccount.addEventListener(
     "change",
-    updateFormFields
+    function () {
+
+        // Do NOT rebuild the account options.
+        // Just update conditional fields.
+        updateFormFields();
+    }
 );
 
 
 // ------------------------------------
-// PAYMENT ACCOUNT CHANGE
+// CREDIT ACCOUNT CHANGE
 // ------------------------------------
 
-paymentAccount.addEventListener(
+creditAccount.addEventListener(
     "change",
-    updateFormFields
+    function () {
+
+        // Do NOT rebuild the account options.
+        // Just update conditional fields.
+        updateFormFields();
+    }
 );
 
+
+
+
+// ------------------------------------
+// FORM SUBMIT
+// ------------------------------------
 
 // ------------------------------------
 // FORM SUBMIT
@@ -401,7 +488,6 @@ form.addEventListener(
     function (event) {
 
         event.preventDefault();
-
 
         try {
 
@@ -417,348 +503,266 @@ form.addEventListener(
             const transactionAmount =
                 Number(amount.value);
 
+            const debitCode =
+                debitAccount.value;
 
-            if (!date) {
-
-                throw new Error(
-                    "Transaction date is required."
-                );
-
-            }
-
-
-            if (
-                !transactionDescription
-            ) {
-
-                throw new Error(
-                    "Description is required."
-                );
-
-            }
-
-
-            if (
-                !transactionAmount ||
-                transactionAmount <= 0
-            ) {
-            
-                throw new Error(
-                    "Amount must be greater than zero."
-                );
-            
-            }
-            
-            
-            // --------------------------------
-            // OWNER DRAWING
-            // --------------------------------
-            
-            if (type === "owner_drawing") {
-                const drawingPaymentAccount =
-                    document.getElementById(
-                        "drawingPaymentAccount"
-                    ).value;
-            
-                if (!drawingPaymentAccount) {
-                    throw new Error(
-                        "Select the payment account."
-                    );
-                }
-            
-                const drawingTransaction =
-                    createOwnerDrawingTransaction({
-                        date,
-                        description: transactionDescription,
-                        amount: transactionAmount,
-                        paidFrom: drawingPaymentAccount
-                    });
-            
-                if (editingTransactionId) {
-                    drawingTransaction.id =
-                        editingTransactionId;
-            
-                    updateTransaction(
-                        editingTransactionId,
-                        drawingTransaction
-                    );
-            
-                    alert(
-                        "Owner drawing updated successfully."
-                    );
-                } else {
-                    saveTransaction(
-                        drawingTransaction
-                    );
-            
-                    alert(
-                        "Owner drawing saved successfully."
-                    );
-                }
-            
-                resetForm();
-            
-                document.dispatchEvent(
-                    new CustomEvent(
-                        "transactionsUpdated"
-                    )
-                );
-            
-                return;
-            }
-            
-            
-            let transaction;
+            const creditCode =
+                creditAccount.value;
 
 
             // --------------------------------
-            // REVENUE
+            // BASIC VALIDATION
             // --------------------------------
 
-            if (type === "revenue") {
-
-                if (!account.value) {
-
-                    throw new Error(
-                        "Select the revenue account."
-                    );
-
-                }
-
-
-                if (
-                    !receivingAccount.value
-                ) {
-
-                    throw new Error(
-                        "Select the receiving account."
-                    );
-
-                }
-
-
-                // Credit sale
-
-                if (
-                    receivingAccount.value ===
-                    "1030"
-                ) {
-
-                    if (!customer.value) {
-
-                        throw new Error(
-                            "Select the customer."
-                        );
-
-                    }
-
-
-                    if (!dueDate.value) {
-
-                        throw new Error(
-                            "Due date is required for credit sales."
-                        );
-
-                    }
-
-                }
-
-
-                transaction =
-                    createRevenueTransaction({
-
-                        date,
-
-                        description:
-                            transactionDescription,
-
-                        amount:
-                            transactionAmount,
-
-                        receivedAccount:
-                            receivingAccount.value,
-
-                        revenueAccount:
-                            account.value
-
-                    });
-
-
-                if (
-                    receivingAccount.value ===
-                    "1030"
-                ) {
-
-                    transaction.customerId =
-                        customer.value;
-
-                    transaction.dueDate =
-                        dueDate.value;
-
-                }
-
-            }
-
-
-            // --------------------------------
-            // EXPENSE
-            // --------------------------------
-
-            else if (
-                type === "expense"
-            ) {
-
-                if (!account.value) {
-
-                    throw new Error(
-                        "Select the expense account."
-                    );
-
-                }
-
-
-                if (
-                    !paymentAccount.value
-                ) {
-
-                    throw new Error(
-                        "Select the payment account."
-                    );
-
-                }
-
-
-                // Credit purchase
-
-                if (
-                    paymentAccount.value ===
-                    "2010"
-                ) {
-
-                    if (!supplier.value) {
-
-                        throw new Error(
-                            "Select the supplier."
-                        );
-
-                    }
-
-
-                    if (!dueDate.value) {
-
-                        throw new Error(
-                            "Due date is required for credit purchases."
-                        );
-
-                    }
-
-                }
-
-
-                transaction =
-                    createExpenseTransaction({
-
-                        date,
-
-                        description:
-                            transactionDescription,
-
-                        amount:
-                            transactionAmount,
-
-                        expenseAccount:
-                            account.value,
-
-                        paidFrom:
-                            paymentAccount.value
-
-                    });
-
-
-                if (
-                    paymentAccount.value ===
-                    "2010"
-                ) {
-
-                    transaction.supplierId =
-                        supplier.value;
-
-                    transaction.dueDate =
-                        dueDate.value;
-
-                }
-
-            }
-
-
-            // --------------------------------
-            // ASSET
-            // --------------------------------
-
-            else if (
-                type === "asset"
-            ) {
-
-                if (!assetAccount.value) {
-
-                    throw new Error(
-                        "Select the asset account."
-                    );
-
-                }
-
-
-                if (
-                    !paymentAccount.value
-                ) {
-
-                    throw new Error(
-                        "Select the payment account."
-                    );
-
-                }
-
-
-                transaction =
-                    createAssetTransaction({
-
-                        date,
-
-                        description:
-                            transactionDescription,
-
-                        amount:
-                            transactionAmount,
-
-                        assetAccount:
-                            assetAccount.value,
-
-                        paidFrom:
-                            paymentAccount.value
-
-                    });
-
-            }
-
-
-            else {
-
+            if (!type) {
                 throw new Error(
                     "Select a transaction type."
                 );
+            }
 
+            if (!date) {
+                throw new Error(
+                    "Transaction date is required."
+                );
+            }
+
+            if (!transactionDescription) {
+                throw new Error(
+                    "Description is required."
+                );
+            }
+
+            if (
+                !Number.isFinite(transactionAmount) ||
+                transactionAmount <= 0
+            ) {
+                throw new Error(
+                    "Amount must be greater than zero."
+                );
             }
 
 
             // --------------------------------
-            // SAVE
+            // ACCOUNT VALIDATION
+            // --------------------------------
+
+            if (!debitCode) {
+                throw new Error(
+                    "Select the debit account."
+                );
+            }
+
+            if (!creditCode) {
+                throw new Error(
+                    "Select the credit account."
+                );
+            }
+
+            if (debitCode === creditCode) {
+                throw new Error(
+                    "Debit and credit accounts cannot be the same."
+                );
+            }
+
+
+            // --------------------------------
+            // TRANSACTION RULE
+            // --------------------------------
+
+            const rule =
+                getTransactionRule(type);
+
+            if (!rule) {
+                throw new Error(
+                    "Invalid transaction type."
+                );
+            }
+
+
+            // --------------------------------
+            // VERIFY ACCOUNT IS ALLOWED
+            // --------------------------------
+
+            if (
+                !rule.debitAccounts.includes(
+                    debitCode
+                )
+            ) {
+                throw new Error(
+                    "The selected debit account is not allowed for this transaction type."
+                );
+            }
+
+            if (
+                !rule.creditAccounts.includes(
+                    creditCode
+                )
+            ) {
+                throw new Error(
+                    "The selected credit account is not allowed for this transaction type."
+                );
+            }
+
+
+            // --------------------------------
+            // METADATA
+            // --------------------------------
+
+            const metadata = {};
+
+
+            // --------------------------------
+            // CUSTOMER TRANSACTIONS
+            // --------------------------------
+
+            if (
+                type === "revenue" &&
+                debitCode === "1030"
+            ) {
+
+                if (!customer.value) {
+                    throw new Error(
+                        "Select the customer for a credit sale."
+                    );
+                }
+
+                if (!dueDate.value) {
+                    throw new Error(
+                        "Due date is required for a credit sale."
+                    );
+                }
+
+                metadata.customerId =
+                    customer.value;
+
+                metadata.dueDate =
+                    dueDate.value;
+            }
+
+
+            if (
+                type === "customer_payment"
+            ) {
+
+                if (!customer.value) {
+                    throw new Error(
+                        "Select the customer."
+                    );
+                }
+
+                metadata.customerId =
+                    customer.value;
+            }
+
+
+            // --------------------------------
+            // SUPPLIER TRANSACTIONS
+            // --------------------------------
+
+            if (
+                type === "inventory_purchase" &&
+                creditCode === "2010"
+            ) {
+
+                if (!supplier.value) {
+                    throw new Error(
+                        "Select the supplier for this credit purchase."
+                    );
+                }
+
+                if (!dueDate.value) {
+                    throw new Error(
+                        "Due date is required for a credit purchase."
+                    );
+                }
+
+                metadata.supplierId =
+                    supplier.value;
+
+                metadata.dueDate =
+                    dueDate.value;
+            }
+
+
+            if (
+                type === "expense" &&
+                creditCode === "2010"
+            ) {
+
+                if (!supplier.value) {
+                    throw new Error(
+                        "Select the supplier for this credit purchase."
+                    );
+                }
+
+                if (!dueDate.value) {
+                    throw new Error(
+                        "Due date is required for a credit purchase."
+                    );
+                }
+
+                metadata.supplierId =
+                    supplier.value;
+
+                metadata.dueDate =
+                    dueDate.value;
+            }
+
+
+            if (
+                type === "supplier_payment"
+            ) {
+
+                if (!supplier.value) {
+                    throw new Error(
+                        "Select the supplier."
+                    );
+                }
+
+                metadata.supplierId =
+                    supplier.value;
+            }
+
+
+            // --------------------------------
+            // CREATE JOURNAL TRANSACTION
+            // --------------------------------
+
+            const transaction =
+                createJournalTransaction({
+
+                    date,
+
+                    description:
+                        transactionDescription,
+
+                    amount:
+                        transactionAmount,
+
+                    debitAccount:
+                        debitCode,
+
+                    creditAccount:
+                        creditCode,
+
+                    reference:
+                        `${type.toUpperCase()}-${Date.now()}`,
+
+                    metadata,
+
+                    type
+
+                });
+
+
+            // --------------------------------
+            // EDIT / UPDATE
             // --------------------------------
 
             if (editingTransactionId) {
 
                 transaction.id =
                     editingTransactionId;
-
 
                 updateTransaction(
                     editingTransactionId,
@@ -770,6 +774,10 @@ form.addEventListener(
                 );
 
             }
+
+            // --------------------------------
+            // NEW TRANSACTION
+            // --------------------------------
 
             else {
 
@@ -791,8 +799,9 @@ form.addEventListener(
             resetForm();
 
 
-            // Tell journal table
-            // to refresh
+            // --------------------------------
+            // REFRESH TABLES
+            // --------------------------------
 
             document.dispatchEvent(
                 new CustomEvent(
@@ -813,7 +822,6 @@ form.addEventListener(
     }
 );
 
-
 // ------------------------------------
 // RESET FORM
 // ------------------------------------
@@ -833,6 +841,10 @@ function resetForm() {
 // EDIT TRANSACTION
 // ------------------------------------
 
+/// ------------------------------------
+// EDIT TRANSACTION
+// ------------------------------------
+
 document.addEventListener(
     "editTransaction",
     function (event) {
@@ -840,117 +852,129 @@ document.addEventListener(
         const transaction =
             event.detail;
 
+        if (!transaction) {
+            return;
+        }
 
         editingTransactionId =
             transaction.id;
 
 
-        transactionType.value =
-            transaction.type ===
-            "customer_payment"
-                ? "revenue"
-                : transaction.type;
+        // --------------------------------
+        // TRANSACTION TYPE
+        // --------------------------------
 
+        transactionType.value =
+            transaction.type || "journal";
+
+
+        // --------------------------------
+        // BASIC FIELDS
+        // --------------------------------
 
         transactionDate.value =
-            transaction.date;
-
+            transaction.date || "";
 
         description.value =
-            transaction.description;
-
+            transaction.description || "";
 
         amount.value =
-            transaction.amount;
+            transaction.amount || "";
 
+
+        // --------------------------------
+        // LOAD ACCOUNT OPTIONS
+        // --------------------------------
+
+        updateAccountOptions();
+
+
+        // --------------------------------
+        // DEBIT ACCOUNT
+        // --------------------------------
 
         if (
-            transaction.type ===
-            "revenue"
+            debitAccount &&
+            transaction.debitAccount
         ) {
 
-            account.value =
-                transaction.revenueAccount;
-
-            receivingAccount.value =
-                transaction.account;
-
-
-            if (
-                transaction.customerId
-            ) {
-
-                customer.value =
-                    transaction.customerId;
-
-            }
-
-
-            if (
-                transaction.dueDate
-            ) {
-
-                dueDate.value =
-                    transaction.dueDate;
-
-            }
-
+            debitAccount.value =
+                transaction.debitAccount;
         }
 
 
+        // --------------------------------
+        // CREDIT ACCOUNT
+        // --------------------------------
+
         if (
-            transaction.type ===
-            "expense"
+            creditAccount &&
+            transaction.creditAccount
         ) {
 
-            account.value =
-                transaction.expenseAccount;
-
-            paymentAccount.value =
-                transaction.account;
-
-
-            if (
-                transaction.supplierId
-            ) {
-
-                supplier.value =
-                    transaction.supplierId;
-
-            }
-
-
-            if (
-                transaction.dueDate
-            ) {
-
-                dueDate.value =
-                    transaction.dueDate;
-
-            }
-
+            creditAccount.value =
+                transaction.creditAccount;
         }
 
 
-        if (
-            transaction.type ===
-            "asset"
-        ) {
-
-            assetAccount.value =
-                transaction.assetAccount;
-
-            paymentAccount.value =
-                transaction.account;
-
-        }
-
+        // --------------------------------
+        // UPDATE CONDITIONAL FIELDS
+        // --------------------------------
 
         updateFormFields();
 
+
+        // --------------------------------
+        // PARTY METADATA
+        // --------------------------------
+
+        const metadata =
+            transaction.metadata || {};
+
+
+        // --------------------------------
+        // CUSTOMER
+        // --------------------------------
+
+        if (
+            metadata.customerId &&
+            customer
+        ) {
+
+            customer.value =
+                metadata.customerId;
+        }
+
+
+        // --------------------------------
+        // SUPPLIER
+        // --------------------------------
+
+        if (
+            metadata.supplierId &&
+            supplier
+        ) {
+
+            supplier.value =
+                metadata.supplierId;
+        }
+
+
+        // --------------------------------
+        // DUE DATE
+        // --------------------------------
+
+        if (
+            metadata.dueDate &&
+            dueDate
+        ) {
+
+            dueDate.value =
+                metadata.dueDate;
+        }
+
     }
 );
-
 
 // ------------------------------------
 // INITIALIZE

@@ -78,45 +78,85 @@
 <section class="app-section" id="transactionSection">
 <h2>Enter Transaction</h2>
 <form id="transactionForm">
-<div class="form-group">
-<label for="transactionType">Transaction Type</label>
-<select id="transactionType" required="">
-    <option value="">Select Transaction Type</option>
-    <option value="revenue">Revenue</option>
-    <option value="expense">Expense</option>
-    <option value="asset">Asset Purchase</option>
-    <option value="owner_drawing">Owner Drawing</option>
-</select>
-</div>
+    <div class="form-group">
+        <label for="transactionType">
+            Transaction Type
+        </label>
+    
+        <select id="transactionType" required>
+            <option value="">Select transaction type</option>
+    
+            <option value="revenue">
+                Revenue / Sale
+            </option>
+    
+            <option value="expense">
+                Expense
+            </option>
+    
+            <option value="inventory_purchase">
+                Inventory Purchase
+            </option>
+    
+            <option value="asset_purchase">
+                Asset Purchase
+            </option>
+    
+            <option value="customer_payment">
+                Customer Payment
+            </option>
+    
+            <option value="supplier_payment">
+                Supplier Payment
+            </option>
+    
+            <option value="customer_deposit">
+                Customer Deposit
+            </option>
+    
+            <option value="loan_received">
+                Loan Received
+            </option>
+    
+            <option value="loan_repayment">
+                Loan Repayment
+            </option>
+    
+            <option value="owner_investment">
+                Owner Investment
+            </option>
+    
+            <option value="owner_drawing">
+                Owner Drawing
+            </option>
+        </select>
+    </div>
+
+    <div id="debitAccountGroup" class="form-group">
+        <label for="debitAccount">
+            Debit Account/Receive Into
+        </label>
+    
+        <select id="debitAccount">
+            <option value="">
+                Select debit account
+            </option>
+        </select>
+    </div>
+    
+    <div id="creditAccountGroup" class="form-group">
+        <label for="creditAccount">
+            Credit Account/Pay out From
+        </label>
+    
+        <select id="creditAccount">
+            <option value="">
+                Select credit account
+            </option>
+        </select>
+    </div>
 
 <div class="form-group">
-<label id="normalAccountGroup" style="display:none;">
-      Account
-<select id="account">
-    <option value="">Select Account</option>
-    <option value="2030">Deferred Revenue</option>
-    <option value="4010">Sales Revenue</option>
-    <option value="4020">Service Revenue</option>
-    <option value="5010">Feed Expense</option>
-    <option value="5020">Salary Expense</option>
-    <option value="5030">Rent Expense</option>
-    <option value="5040">Utilities Expense</option>
-    <option value="5060">Transport Expense</option>
-    <option value="5050">Depreciation Expense</option>
-    <option value="5070">Other Expenses</option>
-</select>
-</label>
-
-<label id="receivingAccountGroup" style="display:none;">
-      Receiving Account
-<select id="receivingAccount">
-    <option value="">Select Receiving Account</option>
-    <option value="1010">Cash</option>
-    <option value="1020">Bank</option>
-    <option value="1030">Accounts Receivable</option>
-</select>
-</label>
-
 <label id="customerGroup" style="display:none;">
       Customer
 <select id="customer">
@@ -129,40 +169,10 @@
       <input id="dueDate" type="date"/>
 </label>
 
-<label id="paymentAccountGroup" style="display:none;">
-      Payment Account
-<select id="paymentAccount">
-    <option value="">Select Payment Account</option>
-    <option value="1010">Cash</option>
-    <option value="1020">Bank</option>
-    <option value="2010">Accounts Payable</option>
-    <option value="2020">Loans Payable</option>
-</select>
-</label>
-
-<label id="drawingPaymentAccountGroup" style="display:none;">
-      Payment Account
-<select id="drawingPaymentAccount">
-    <option value="">Select Payment Account</option>
-    <option value="1010">Cash</option>
-    <option value="1020">Bank</option>
-</select>
-</label>
-
 <label id="supplierGroup" style="display:none;">
       Supplier
 <select id="supplier">
     <option value="">Select Supplier</option>
-</select>
-</label>
-
-<label id="assetAccountGroup" style="display:none;">
-      Asset Account
-<select id="assetAccount">
-    <option value="">Select Asset</option>
-    <option value="1500">Machinery</option>
-    <option value="1510">Vehicles</option>
-    <option value="1520">Buildings</option>
 </select>
 </label>
 </div>

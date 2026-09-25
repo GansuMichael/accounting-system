@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+<title>
+   accounting-system
+  </title>
+<link href="css/style.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar">
+        <div class="sidebar-brand">
+            <div class="brand-mark">G</div>
+            <div><strong>GANSU</strong><span>Accounting System</span></div>
+        </div>
+        <nav aria-label="Main navigation" class="sidebar-nav">
+            <div class="nav-group-title">WORKSPACE</div>
+            <button class="nav-item" data-section="dashboardSection" type="button"><span class="nav-icon"></span><span class="nav-label">Dashboard</span></button>
+            <button class="nav-item" data-section="transactionSection" type="button"><span class="nav-icon"></span><span class="nav-label">New Transaction</span></button>
+            <div class="nav-group-title">CUSTOMERS &amp; SUPPLIERS</div>
+            <button class="nav-item" data-section="partiesSection" type="button"><span class="nav-icon"></span><span class="nav-label">Parties</span></button>
+            <button class="nav-item" data-section="receivablesPayablesSection" type="button"><span class="nav-icon"></span><span class="nav-label">Receivables &amp; Payables</span></button>
+            <button class="nav-item" data-section="invoiceBalanceSection" type="button"><span class="nav-icon"></span><span class="nav-label">Invoice / Bill Balances</span></button>
+            <button class="nav-item" data-section="arApAgingSection" type="button"><span class="nav-icon"></span><span class="nav-label">AR / AP Aging</span></button>
+            <button class="nav-item" data-section="companyAgingSection" type="button"><span class="nav-icon"></span><span class="nav-label">Company Aging</span></button>
+            <button class="nav-item" data-section="arApReconciliationSection" type="button"><span class="nav-icon"></span><span class="nav-label">AR / AP Reconciliation</span></button>
+            <button class="nav-item" data-section="arApExceptionSection" type="button"><span class="nav-icon"></span><span class="nav-label">AR / AP Exceptions</span></button>
+            <button class="nav-item" data-section="settlementSection" type="button"><span class="nav-icon"></span><span class="nav-label">Settlement</span></button>
+            <button class="nav-item" data-section="multiSettlementSection" type="button"><span class="nav-icon"></span><span class="nav-label">Multi-Settlement</span></button>
+            <button class="nav-item" data-section="paymentAllocationEditSection" type="button"><span class="nav-icon"></span><span class="nav-label">Payment Allocation</span></button>
+            <button class="nav-item" data-section="unallocatedSection" type="button"><span class="nav-icon"></span><span class="nav-label">Credits &amp; Prepayments</span></button>
+            <button class="nav-item" data-section="creditApplicationSection" type="button"><span class="nav-icon"></span><span class="nav-label">Credit Application</span></button>
+            <button class="nav-item" data-section="allocationMigrationSection" type="button"><span class="nav-icon"></span><span class="nav-label">Allocation Migration</span></button>
+            <button class="nav-item" data-section="partyStatementSection" type="button"><span class="nav-icon"></span><span class="nav-label">Party Statements</span></button>
+            <div class="nav-group-title">ACCOUNTING</div>
+            <button class="nav-item" data-section="journalSection" type="button"><span class="nav-icon"></span><span class="nav-label">Transaction Journal</span></button>
+            <button class="nav-item" data-section="ledgerSection" type="button"><span class="nav-icon"></span><span class="nav-label">General Ledger</span></button>
+            <button class="nav-item" data-section="trialBalanceSection" type="button"><span class="nav-icon"></span><span class="nav-label">Trial Balance</span></button>
+            <button class="nav-item" data-section="openingBalanceSection" type="button"><span class="nav-icon"></span><span class="nav-label">Opening Balances</span></button>
+            <div class="nav-group-title">FIXED ASSETS</div>
+            <button class="nav-item" data-section="assetRegisterSection" type="button"><span class="nav-icon"></span><span class="nav-label">Asset Register</span></button>
+            <button class="nav-item" data-section="depreciationSection" type="button"><span class="nav-icon"></span><span class="nav-label">Depreciation</span></button>
+            <div class="nav-group-title">REPORTS</div>
+            <button class="nav-item" data-section="incomeStatementSection" type="button"><span class="nav-icon"></span><span class="nav-label">Income Statement</span></button>
+            <button class="nav-item" data-section="balanceSheetSection" type="button"><span class="nav-icon"></span><span class="nav-label">Balance Sheet</span></button>
+            <button class="nav-item" data-section="cashFlowSection" type="button"><span class="nav-icon"></span><span class="nav-label">Cash Flow</span></button>
+            <button class="nav-item" data-section="financialStatementsSection" type="button"><span class="nav-icon"></span><span class="nav-label">Financial Statements</span></button>
+            <div class="nav-group-title">CONTROL</div>
+            <button class="nav-item" data-section="auditLogSection" type="button"><span class="nav-icon"></span><span class="nav-label">Audit Trail</span></button>
+            <button class="nav-item" data-section="transactionReversalSection" type="button"><span class="nav-icon"></span><span class="nav-label">Transaction Reversal</span></button>
+            <button class="nav-item" data-section="accountingIntegritySection" type="button"><span class="nav-icon"></span><span class="nav-label">Accounting Integrity</span></button>
+            <button class="nav-item" data-section="financialStatementIntegritySection" type="button"><span class="nav-icon"></span><span class="nav-label">Statement Integrity</span></button>
+            <button class="nav-item" data-section="accountingControlCenterSection" type="button"><span class="nav-icon"></span><span class="nav-label">Control Center</span></button>
+            <button class="nav-item" data-section="accountingPeriodSection" type="button"><span class="nav-icon"></span><span class="nav-label">Accounting Period</span></button>
+            <button class="nav-item" data-section="periodCloseSection" type="button"><span class="nav-icon"></span><span class="nav-label">Period Close</span></button>
+        </nav>
+        <div class="sidebar-footer"><span class="status-dot"></span><span>Local accounting workspace</span></div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<main class="app-main">
+<header class="app-topbar">
+    <button aria-label="Open navigation" class="menu-toggle" id="menuToggle" type="button">☰</button>
+    <div class="page-heading"><span class="eyebrow">GANSU HOLDINGS</span><h1 id="currentSectionTitle">Financial Dashboard</h1></div>
+    <div class="topbar-actions"><span class="app-badge">ACCOUNTING</span></div>
+</header>
+
+<div class="app-content" id="appContent">
+
+
+<section class="app-section" id="transactionSection">
+<h2>Enter Transaction</h2>
+<form id="transactionForm">
+<div class="form-group">
+<label for="transactionType">Transaction Type</label>
+<select id="transactionType" required="">
+    <option value="">Select Transaction Type</option>
+    <option value="revenue">Revenue</option>
+    <option value="expense">Expense</option>
+    <option value="asset">Asset Purchase</option>
+    <option value="owner_drawing">Owner Drawing</option>
+</select>
+</div>
+
+<div class="form-group">
+<label id="normalAccountGroup" style="display:none;">
+      Account
+<select id="account">
+    <option value="">Select Account</option>
+    <option value="4010">Sales Revenue</option>
+    <option value="4020">Service Revenue</option>
+    <option value="5010">Feed Expense</option>
+    <option value="5020">Salary Expense</option>
+    <option value="5030">Rent Expense</option>
+    <option value="5040">Utilities Expense</option>
+    <option value="5060">Transport Expense</option>
+    <option value="5070">Other Expenses</option>
+    <option value="owner_drawing">Owner Drawing</option>
+</select>
+</label>
+
+<label id="receivingAccountGroup" style="display:none;">
+      Receiving Account
+<select id="receivingAccount">
+    <option value="">Select Receiving Account</option>
+    <option value="1010">Cash</option>
+    <option value="1020">Bank</option>
+    <option value="1030">Accounts Receivable</option>
+</select>
+</label>
+
+<label id="customerGroup" style="display:none;">
+      Customer
+<select id="customer">
+    <option value="">Select Customer</option>
+</select>
+</label>
+
+<label id="dueDateGroup" style="display:none;">
+      Due Date
+      <input id="dueDate" type="date"/>
+</label>
+
+<label id="paymentAccountGroup" style="display:none;">
+      Payment Account
+<select id="paymentAccount">
+    <option value="">Select Payment Account</option>
+    <option value="1010">Cash</option>
+    <option value="1020">Bank</option>
+    <option value="2010">Accounts Payable</option>
+    <option value="2020">Loans Payable</option>
+</select>
+</label>
+
+<label id="drawingPaymentAccountGroup" style="display:none;">
+      Payment Account
+<select id="drawingPaymentAccount">
+    <option value="">Select Payment Account</option>
+    <option value="1010">Cash</option>
+    <option value="1020">Bank</option>
+</select>
+</label>
+
+<label id="supplierGroup" style="display:none;">
+      Supplier
+<select id="supplier">
+    <option value="">Select Supplier</option>
+</select>
+</label>
+
+<label id="assetAccountGroup" style="display:none;">
+      Asset Account
+<select id="assetAccount">
+    <option value="">Select Asset</option>
+    <option value="1500">Machinery</option>
+    <option value="1510">Vehicles</option>
+    <option value="1520">Buildings</option>
+</select>
+</label>
+</div>
+
+<div class="form-group">
+<label for="transactionDate">Date</label>
+<input id="transactionDate" required="" type="date"/></div>
+<div class="form-group">
+<label for="description">Description</label>
+<input id="description" placeholder="e.g. Feed sales" required="" type="text"/></div>
+
+<div class="form-group">
+<label for="amount">Amount</label>
+<input id="amount" min="0" placeholder="0.00" required="" step="0.01" type="number"/></div>
+
+<div class="form-actions">
+<button type="submit">Save Transaction</button>
+<button id="clearTransaction" type="button">Clear</button>
+<button id="resetTransaction" type="button">Reset</button>
+</div>
+</form>
+</section>
+
+
+<section class="app-section" id="partiesSection">
+
+<h2>Customers &amp; Suppliers</h2>
+<div class="party-form">
+<label>
+    Party Type
+<select id="partyType">
+    <option value="">Select Type</option>
+    <option value="customer">Customer</option>
+    <option value="supplier">Supplier</option>
+</select>
+</label>
+<label>Name<input id="partyName" placeholder="Enter name" type="text"/></label>
+<label>Phone<input id="partyPhone" placeholder="Phone number" type="text"/></label>
+<label>Email<input id="partyEmail" placeholder="Email address" type="email"/></label>
+<label>Address<input id="partyAddress" placeholder="Address" type="text"/></label>
+<button id="saveParty" type="button">Save Party</button>
+</div>
+
+<h3>Customers</h3>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+
+    <tbody id="customersBody"></tbody>
+</table>
+
+<h3>Suppliers</h3>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    
+    <tbody id="suppliersBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="receivablesPayablesSection">
+
+<h2>Receivables &amp; Payables</h2>
+<!-- DATE FILTER -->
+<div class="report-controls">
+<label>From:<input id="arApFromDate" type="date"/></label>
+<label>To:<input id="arApToDate" type="date"/></label>
+<button id="filterArAp" type="button">Filter</button>
+<button id="resetArAp" type="button">Reset</button>
+<button id="printArAp" type="button">Print</button>
+</div>
+<!-- SUMMARY -->
+<div class="ar-ap-summary">
+<div><h3>Accounts Receivable</h3><p id="totalAccountsReceivable">₦0.00</p></div>
+<div>
+<h3>Accounts Payable</h3><p id="totalAccountsPayable">₦0.00</p></div>
+</div>
+<!-- RECEIVABLE TABLE -->
+<h3>Receivable Movements</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Description</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Movement</th>
+        </tr>
+    </thead>
+    <tbody id="receivableBody"></tbody>
+</table>
+<!-- PAYABLE TABLE -->
+<h3>Payable Movements</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Description</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Movement</th>
+        </tr>
+    </thead>
+    <tbody id="payableBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="invoiceBalanceSection">
+
+<h2>Invoice / Bill Balances</h2>
+<div class="report-controls">
+<label>
+    Type
+<select id="invoiceBalanceType">
+    <option value="">Select Type</option>
+    <option value="customer">Customer Invoices</option>
+    <option value="supplier">Supplier Bills</option>
+</select>
+</label>
+
+<label>
+     Customer / Supplier
+<select id="invoiceBalanceParty">
+    <option value="">Select Party</option>
+</select>
+</label>
+
+<label>As of<input id="invoiceBalanceDate" type="date"/></label>
+<button id="calculateInvoiceBalances" type="button">Calculate</button>
+<button id="resetInvoiceBalances" type="button">Reset</button>
+<button id="printInvoiceBalances" type="button">Print</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Invoice / Bill</th>
+            <th>Party</th>
+            <th>Date</th>
+            <th>Due Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Paid</th>
+            <th>Outstanding</th>
+        </tr>
+    </thead>
+    <tbody id="invoiceBalanceBody"></tbody>
+    <tfoot>
+        <tr>
+            <th colspan="7">Total Outstanding</th>
+            <th id="invoiceBalanceTotal">₦0.00</th>
+        </tr>
+    </tfoot>
+</table>
+</section>
+
+
+<section class="app-section" id="arApAgingSection">
+
+<h2>Accounts Receivable / Payable Aging</h2>
+<div class="filter-controls">
+<label>
+     Type
+<select id="arApAgingType">
+<option value="customer">Accounts Receivable</option>
+<option value="supplier">Accounts Payable</option>
+</select>
+</label>
+
+<label>
+     Customer / Supplier
+<select id="arApAgingParty">
+    <option value="">Select Party</option>
+</select>
+
+</label>
+<label>As Of Date<input id="arApAgingDate" type="date"/></label>
+<button id="calculateArApAging" type="button">Calculate</button>
+<button id="resetArApAging" type="button">Reset</button>
+<button id="printArApAging" type="button">Print</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Invoice / Bill</th>
+            <th>Date</th>
+            <th>Due Date</th>
+            <th>Original Amount</th>
+            <th>Paid</th>
+            <th>Outstanding</th>
+            <th>Days</th>
+        </tr>
+    </thead>
+    <tbody id="arApAgingBody"></tbody>
+    <tfoot>
+        <tr>
+            <th colspan="5">Total Outstanding</th>
+            <th id="arApAgingTotal">₦0.00</th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
+</section>
+
+
+<section class="app-section" id="companyAgingSection">
+
+<h2>Company-Wide AR / AP Aging</h2>
+<div class="filter-controls">
+<label>
+     Report Type
+<select id="companyAgingType">
+    <option value="receivable">Accounts Receivable</option>
+    <option value="payable">Accounts Payable</option>
+</select>
+</label>
+<label>As Of Date<input id="companyAgingDate" type="date"/></label>
+<button id="calculateCompanyAging" type="button">Calculate</button>
+<button id="resetCompanyAging" type="button">Reset</button>
+<button id="printCompanyAging" type="button">Print</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Customer / Supplier</th>
+            <th>Current</th>
+            <th>1–30</th>
+            <th>31–60</th>
+            <th>61–90</th>
+            <th>91–120</th>
+            <th>120+</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="companyAgingBody"></tbody>
+    <tfoot>
+        <tr id="companyAgingTotalRow"></tr>
+    </tfoot>
+</table>
+</section>
+
+
+<section class="app-section" id="arApReconciliationSection">
+
+<h2>A/R &amp; A/P Control Reconciliation</h2>
+<div class="filter-controls">
+<label>As Of Date<input id="reconciliationDate" type="date"/></label>
+<button id="calculateReconciliation" type="button">Reconcile</button>
+<button id="resetReconciliation" type="button">Reset</button>
+<button id="printReconciliation" type="button">Print</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Account</th>
+            <th>Name</th>
+            <th>General Ledger</th>
+            <th>Subledger</th>
+            <th>Difference</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody id="reconciliationBody"></tbody>
+</table>
+
+
+</section><section class="app-section" id="arApExceptionSection">
+
+<h2>A/R &amp; A/P Reconciliation Details</h2>
+<div class="filter-controls">
+<label>
+     Account
+<select id="exceptionType">
+    <option value="receivable">Accounts Receivable</option>
+    <option value="payable">Accounts Payable</option>
+</select>
+</label>
+<label>As Of Date<input id="exceptionDate" type="date"/></label>
+<button id="calculateExceptions" type="button">Show Details</button>
+<button id="resetExceptions" type="button">Reset</button>
+<button id="printExceptions" type="button">Print</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Customer / Supplier</th>
+            <th>Document</th>
+            <th>Date</th>
+            <th>Due Date</th>
+            <th>Amount</th>
+            <th>Paid / Applied</th>
+            <th>Outstanding / Unallocated</th>
+        </tr>
+    </thead>
+    <tbody id="exceptionBody"></tbody>
+</table>
+
+
+</section><section class="app-section" id="settlementSection">
+
+<h2>Receivable &amp; Payable Settlement</h2>
+<div class="settlement-form">
+<label>
+     Settlement Type
+<select id="settlementType">
+    <option value="">Select Settlement</option>
+<option value="customer">Customer Payment</option>
+    <option value="supplier">Supplier Payment</option>
+</select>
+</label>
+<label>Date<input id="settlementDate" type="date"/></label>
+<label>Description<input id="settlementDescription" placeholder="Payment description" type="text"/></label>
+<label>Amount<input id="settlementAmount" min="0" placeholder="Enter payment amount" step="0.01" type="number"/></label>
+<label>
+     Account
+<select id="settlementAccount">
+    <option value="">Select Account</option>
+    <option value="1010">Cash</option>
+    <option value="1020">Bank</option>
+</select>
+</label>
+<label>
+     Customer / Supplier
+<select id="settlementParty">
+    <option value="">Select Party</option>
+</select>
+</label>
+<label>
+     Invoice / Bill
+<select id="settlementDocument">
+    <option value="">Select Invoice / Bill</option>
+</select>
+</label>
+<label>Allocation Amount<input id="settlementAllocation" min="0" placeholder="Amount allocated" step="0.01" type="number"/></label>
+<button id="saveSettlement" type="button">Record Settlement</button>
+</div>
+</section>
+
+
+<section class="app-section" id="multiSettlementSection">
+
+<h2>Multi-Invoice / Multi-Bill Payment</h2>
+<div class="filter-controls">
+<label>
+     Type
+<select id="multiSettlementType">
+    <option value="customer">Customer Receipt</option>
+    <option value="supplier">Supplier Payment</option>
+</select>
+</label>
+<label>Date<input id="multiSettlementDate" type="date"/></label>
+<label>Amount<input id="multiSettlementAmount" min="0" step="0.01" type="number"/></label>
+<label>
+     Cash / Bank Account
+<select id="multiSettlementAccount">
+    <option value="1010">Cash</option>
+    <option value="1020">Bank</option>
+</select>
+</label>
+<label>
+     Customer / Supplier
+<select id="multiSettlementParty">
+    <option value="">Select Party</option>
+</select>
+</label>
+</div>
+
+<h3>Open Documents</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Select</th>
+            <th>Invoice / Bill</th>
+            <th>Date</th>
+            <th>Due Date</th>
+            <th>Original</th>
+            <th>Paid</th>
+            <th>Outstanding</th>
+            <th>Allocate</th>
+        </tr>
+    </thead>
+    <tbody id="multiSettlementDocuments"></tbody>
+</table>
+<div>
+    <strong>Total Allocated:</strong>
+    <span id="multiSettlementAllocated">₦0.00</span>
+</div>
+<div>
+    <strong>Unallocated:</strong>
+    <span id="multiSettlementUnallocated">₦0.00</span>
+</div>
+<button id="saveMultiSettlement" type="button">Save Payment</button>
+</section>
+
+
+<section class="app-section" id="paymentAllocationEditSection">
+
+<h2>Payment Allocation Management</h2>
+<div class="filter-controls">
+<label>
+     Payment Type
+<select id="allocationEditType">
+    <option value="customer">Customer Payment</option>
+    <option value="supplier">Supplier Payment</option>
+</select>
+</label>
+<label>
+     Payment
+<select id="allocationEditPayment">
+    <option value="">Select Payment</option>
+</select>
+</label>
+<button id="loadPaymentAllocation" type="button">Load Allocation</button>
+</div>
+<p>Payment Amount:<strong id="allocationPaymentAmount">₦0.00</strong></p>
+<table>
+    <thead>
+        <tr>
+            <th>Invoice / Bill</th>
+            <th>Allocation</th>
+        </tr>
+    </thead>
+    <tbody id="paymentAllocationBody"></tbody>
+</table>
+<p>Total Allocated:<strong id="allocationEditTotal">₦0.00</strong></p>
+<p>Unallocated:<strong id="allocationEditUnallocated">₦0.00</strong></p>
+<label>Reason for Change<input id="allocationEditReason" placeholder="Example: Payment applied to wrong invoice" type="text"/></label>
+<button id="savePaymentAllocation" type="button">Save Allocation Changes</button>
+</section>
+
+
+<section class="app-section" id="unallocatedSection">
+
+<h2>Customer Credits &amp; Supplier Prepayments</h2>
+<div class="unallocated-controls">
+<label>
+     Type
+<select id="unallocatedType">
+    <option value="customer">Customer Credit</option>
+    <option value="supplier">Supplier Prepayment</option>
+</select>
+</label>
+<label>
+     Customer / Supplier
+<select id="unallocatedParty">
+    <option value="">Select Party</option>
+</select>
+</label>
+<button id="loadUnallocated" type="button">View Balance</button>
+</div>
+<div id="unallocatedResult">
+<p>Select a party to view unallocated amounts.</p>
+</div>
+</section>
+
+
+<section class="app-section" id="creditApplicationSection">
+
+<h2>Apply Customer Credit / Supplier Prepayment</h2>
+<label>
+    Type
+<select id="creditApplicationType">
+    <option value="customer">Customer Credit</option>
+    <option value="supplier">Supplier Prepayment</option>
+</select>
+</label>
+<label>
+    Customer / Supplier
+<select id="creditApplicationParty">
+    <option value="">Select Party</option>
+</select>
+</label>
+<label>
+    Available Credit / Prepayment
+<select id="creditApplicationPayment">
+    <option value="">Select Credit / Prepayment</option>
+</select>
+</label>
+<p id="creditApplicationBalance"></p>
+<label>
+    Invoice / Bill
+<select id="creditApplicationDocument">
+    <option value="">Select Invoice / Bill</option>
+</select>
+</label>
+<label>Amount to Apply<input id="creditApplicationAmount" min="0" placeholder="Enter amount" step="0.01" type="number"/></label>
+<button id="applyCreditButton" type="button">Apply Credit</button>
+</section>
+
+
+<section class="app-section" id="allocationMigrationSection">
+
+<h2>Legacy AR / AP Allocation Migration</h2>
+<p>Use this tool to convert older payment records into the current allocation structure.</p>
+<div class="filter-controls">
+<label>
+     Record Type
+<select id="migrationType">
+    <option value="customer">Customer Payments</option>
+    <option value="supplier">Supplier Payments</option>
+</select>
+</label>
+<button id="loadLegacyAllocations" type="button">Load Legacy Records</button>
+<button id="migrateSelectedAllocations" type="button">Migrate Selected</button>
+</div>
+<p id="migrationResult"></p>
+<table>
+    <thead>
+        <tr>
+            <th>Select</th>
+            <th>Date</th>
+            <th>Customer / Supplier</th>
+            <th>Payment</th>
+            <th>Invoice / Bill</th>
+            <th>Payment Amount</th>
+            <th>Allocated</th>
+            <th>Unallocated</th>
+        </tr>
+    </thead>
+    <tbody id="migrationBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="partyStatementSection">
+
+<h2>Customer / Supplier Statement</h2>
+<div class="statement-controls">
+<label>
+     Statement Type
+<select id="statementType">
+    <option value="">Select Type</option>
+    <option value="customer">Customer</option>
+    <option value="supplier">Supplier</option>
+</select>
+</label>
+<label>
+     Party
+<select id="statementParty">
+    <option value="">Select Party</option>
+</select>
+</label>
+<label>As of Date<input id="statementDate" type="date"/></label>
+<button id="generateStatement" type="button">Generate Statement</button>
+<button id="resetStatement" type="button">Reset</button>
+<button id="printStatement" type="button">Print</button>
+</div>
+
+<div id="statementHeader">
+<h3 id="statementPartyName"></h3>
+<p>
+    <strong>Outstanding Balance:</strong>
+    <span id="statementBalance">₦0.00</span>
+</p>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Description</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody id="statementBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="journalSection">
+
+<h2>Transaction Journal</h2>
+<div class="journal-filters">
+<div>
+<label for="journalFromDate">From</label>
+<input id="journalFromDate" type="date"/>
+</div>
+<div>
+<label for="journalToDate">To</label>
+<input id="journalToDate" type="date"/>
+</div>
+<button id="filterJournal" type="button">Apply Filter</button>
+<button id="resetJournalFilter" type="button">Reset</button>
+<button id="printJournal" type="button">Print</button>
+</div>
+
+<div class="table-container">
+<table id="journalTable">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Description</th>
+            <th>Account</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="journalBody"></tbody>
+    <tfoot>
+        <tr>
+            <th colspan="7">Total</th>
+            <th id="journalTotalDebit">₦0.00</th>
+            <th id="journalTotalCredit">₦0.00</th>
+        </tr>
+    </tfoot>
+</table>
+</div>
+</section>
+
+
+<section class="app-section" id="assetRegisterSection">
+
+<h2>Fixed Asset Register</h2>
+<div class="report-controls">
+<label>From:<input id="assetFromDate" type="date"/></label>
+<label>To:<input id="assetToDate" type="date"/></label>
+<button id="filterAssets" type="button">Filter</button>
+<button id="resetAssetFilter" type="button">Reset</button>
+<button id="printAssets" type="button">Print</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Asset</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Accumulated Depreciation</th>
+            <th>Carrying Value</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="assetRegisterBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="depreciationSection">
+
+<h2>Asset Depreciation Schedule</h2>
+<div class="depreciation-form">
+<label>
+     Select Asset
+<select id="depreciationAsset">
+    <option value="">Select asset</option>
+</select>
+</label>
+<label>Depreciation Date<input id="depreciationDate" type="date"/></label>
+<label>Useful Life (Years)<input id="depreciationUsefulLife" min="1" placeholder="Example: 5" step="1" type="number"/></label>
+<label>Residual Value<input id="depreciationResidualValue" min="0" step="0.01" type="number" value="0"/></label>
+</div>
+
+<div class="depreciation-summary">
+<div><strong>Asset Cost</strong><span id="depreciationCost">₦0.00</span></div>
+<div><strong>Annual Depreciation</strong><span id="depreciationAnnual">₦0.00</span></div>
+<div><strong>Monthly Depreciation</strong><span id="depreciationMonthly">₦0.00</span></div>
+<div>
+<strong>Accumulated Depreciation</strong><span id="depreciationAccumulated">₦0.00</span></div>
+<div><strong>Carrying Value</strong><span id="depreciationCarryingValue">₦0.00</span></div>
+</div>
+<button id="postDepreciation" type="button">Post Depreciation</button>
+</section>
+
+
+<section class="app-section" id="ledgerSection">
+
+<h2>General Ledger</h2>
+<div class="ledger-controls">
+<label for="ledgerAccount">Account</label>
+<select id="ledgerAccount">
+    <option value="">All Accounts</option>
+    <option value="1010">Cash</option>
+    <option value="1020">Bank</option>
+    <option value="1030">Accounts Receivable</option>
+    <option value="1040">Inventory</option>
+    <option value="1500">Machinery</option>
+    <option value="1590">Accumulated Depreciation</option>
+    <option value="2010">Accounts Payable</option>
+    <option value="2020">Loans Payable</option>
+    <option value="2030">Deferred Revenue</option>
+    <option value="3010">Owner's Capital</option>
+    <option value="4010">Sales Revenue</option>
+    <option value="5010">Feed Expense</option>
+    <option value="5020">Salary Expense</option>
+    <option value="5030">Rent Expense</option>
+    <option value="5040">Utilities Expense</option>
+    <option value="5050">Depreciation Expense</option>
+</select>
+<label for="ledgerFromDate">From</label>
+<input id="ledgerFromDate" type="date"/>
+<label for="ledgerToDate">To</label>
+<input id="ledgerToDate" type="date"/>
+<button id="filterLedger" type="button">Apply Filter</button>
+<button id="resetLedger" type="button">Reset</button>
+<button id="printLedger" type="button">Print</button>
+</div>
+<div id="ledgerContainer"></div>
+</section>
+
+
+<section class="app-section" id="trialBalanceSection">
+
+<h2>Trial Balance</h2>
+<div class="statement-controls">
+<label>As Of Date<input id="trialBalanceDate" type="date"/></label>
+<button id="generateTrialBalance" type="button">Generate Trial Balance</button>
+<button onclick="window.print()" type="button">Print</button>
+</div>
+<div id="trialBalance"><p>Select as-of date.</p></div>
+</section>
+
+
+<section class="app-section" id="incomeStatementSection">
+
+<h2>Income Statement</h2>
+<div class="report-controls">
+<label>From:<input id="incomeFromDate" type="date"/></label>
+<label>To:<input id="incomeToDate" type="date"/></label>
+<button id="filterIncomeStatement" type="button">Filter</button>
+<button id="resetIncomeStatement" type="button">Reset</button>
+<button id="printIncomeStatement" type="button">Print</button>
+</div>
+<!-- REVENUE -->
+<h3>Revenue</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Account</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody id="incomeRevenueBody"></tbody>
+</table>
+<div class="statement-total">
+    <strong>Total Revenue:</strong><span id="incomeTotalRevenue">₦0.00</span>
+</div>
+<!-- EXPENSES -->
+<h3>Expenses</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Account</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody id="incomeExpenseBody"></tbody>
+</table>
+<div class="statement-total">
+    <strong>Total Expenses:</strong><span id="incomeTotalExpenses">₦0.00</span>
+</div>
+<!-- NET PROFIT -->
+<div class="net-profit">
+    <strong>NET PROFIT / (LOSS)</strong><span id="incomeNetProfit">₦0.00</span>
+</div>
+</section>
+
+
+<section class="app-section" id="balanceSheetSection">
+<h2>Balance Sheet</h2>
+<div class="report-controls">
+<label>As of:<input id="balanceSheetDate" type="date"/></label>
+<button id="filterBalanceSheet" type="button">View</button>
+<button id="resetBalanceSheet" type="button">Reset</button>
+<button id="printBalanceSheet" type="button">Print</button>
+</div>
+<!-- ASSETS -->
+<h3>Assets</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Account</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody id="balanceSheetAssetsBody"></tbody>
+</table>
+<div class="statement-total">
+    <strong>Accumulated Depreciation:</strong><span id="balanceSheetAccumulatedDepreciation">₦0.00</span>
+</div>
+<div class="statement-total">
+    <strong>TOTAL ASSETS:</strong><span id="balanceSheetTotalAssets">₦0.00</span>
+</div>
+<!-- LIABILITIES -->
+<h3>Liabilities</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Account</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody id="balanceSheetLiabilitiesBody"></tbody>
+</table>
+<div class="statement-total">
+    <strong>TOTAL LIABILITIES:</strong><span id="balanceSheetTotalLiabilities">₦0.00</span>
+</div>
+<!-- EQUITY -->
+<h3>Equity</h3>
+<table>
+    <tbody>
+        <tr>
+            <td colspan="2">Owner's Capital</td>
+            <td id="balanceSheetCapital">₦0.00</td>
+        </tr>
+        <tr>
+            <td colspan="2">Retained Earnings</td>
+            <td id="balanceSheetRetainedEarnings">₦0.00</td>
+        </tr>
+        <tr>
+            <td colspan="2">Current Period Profit</td>
+            <td id="balanceSheetCurrentProfit">₦0.00</td>
+        </tr>
+    </tbody>
+</table>
+<div class="statement-total">
+    <strong>TOTAL EQUITY:</strong><span id="balanceSheetTotalEquity">₦0.00</span>
+</div>
+<!-- LIABILITIES + EQUITY -->
+<div class="statement-total">
+    <strong>TOTAL LIABILITIES + EQUITY:</strong><span id="balanceSheetLiabilitiesEquity">₦0.00</span>
+</div>
+<!-- BALANCE CHECK -->
+<div class="statement-total">
+    <strong>Difference:</strong><span id="balanceSheetDifference">₦0.00</span>
+</div>
+<div id="balanceSheetStatus">Balance Sheet not yet calculated.</div>
+</section>
+
+
+<section class="app-section" id="cashFlowSection">
+
+<h2>Cash Flow Statement</h2>
+<div class="statement-controls">
+<label>From Date<input id="cashFlowFromDate" type="date"/></label>
+<label>To Date<input id="cashFlowToDate" type="date"/></label>
+<button id="generateCashFlow" type="button">Generate Cash Flow</button>
+<button id="printCashFlow" type="button">Print</button>
+</div>
+<div id="cashFlowStatement">
+<p>Select a date range and generate the Cash Flow Statement.</p>
+</div>
+</section>
+
+
+<section class="app-section" id="financialStatementsSection">
+
+<h2>Financial Statements</h2>
+<div class="statement-controls">
+<label>From Date<input id="financialStatementsFromDate" type="date"/></label>
+<label>To Date<input id="financialStatementsToDate" type="date"/></label>
+<button id="generateFinancialStatements" type="button">Generate Statements</button>
+<button id="printFinancialStatements" type="button">Print All Statements</button>
+</div>
+<div id="financialStatements">
+<p>Select a reporting period and generate the financial statements.</p>
+</div>
+</section>
+
+
+<section class="app-section" id="dashboardSection">
+
+<h2>Financial Dashboard</h2>
+<div class="filter-controls">
+<label>From<input id="dashboardFromDate" type="date"/></label>
+<label>To<input id="dashboardToDate" type="date"/></label>
+<button id="refreshDashboard" type="button">Refresh Dashboard</button>
+</div>
+<div id="dashboard"></div>
+</section>
+
+
+<section class="app-section" id="openingBalanceSection">
+
+<h2>Opening Balances</h2>
+<p>Generate the balance sheet accounts that will carry forward into the next financial year.</p>
+<label>Previous Year End<input id="openingBalanceDate" type="date"/></label>
+<button id="generateOpeningBalances" type="button">Generate Opening Balances</button>
+<table>
+    <thead>
+        <tr>
+            <th>Financial Year</th>
+            <th>Account Code</th>
+            <th>Account</th>
+            <th>Type</th>
+            <th>Opening Balance</th>
+        </tr>
+    </thead>
+    <tbody id="openingBalanceBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="auditLogSection">
+
+<h2>Audit Trail</h2>
+<div class="filter-controls">
+<button id="refreshAuditLogs" type="button">Refresh</button>
+<button id="printAuditLogs" type="button">Print</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Date / Time</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Entity</th>
+            <th>Entity ID</th>
+            <th>Old Value</th>
+            <th>New Value</th>
+            <th>Reason</th>
+        </tr>
+    </thead>
+    <tbody id="auditLogBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="transactionReversalSection">
+
+<h2>Transaction Reversal</h2>
+<p>Reversing a transaction does not delete the original transaction. It creates an equal and opposite journal entry.</p>
+<label>
+    Transaction
+<select id="reversalTransaction">
+    <option value="">Select Transaction</option>
+</select>
+</label>
+<label>Reason for Reversal<input id="reversalReason" placeholder="Why is this transaction being reversed?" type="text"/></label>
+<button id="reverseTransaction" type="button">Reverse Transaction</button>
+<button id="refreshReversalTransactions" type="button">Refresh</button>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="reversalBody"></tbody>
+</table>
+</section>
+
+
+<section class="app-section" id="accountingIntegritySection">
+
+<h2>Accounting Integrity Check</h2>
+<div>
+<label>Start Date<input id="integrityFromDate" type="date"/></label>
+<label>End Date<input id="integrityToDate" type="date"/></label>
+<button id="runIntegrityCheck" type="button">Run Check</button>
+</div>
+<div id="integrityResult"></div>
+</section>
+
+
+<section class="app-section" id="financialStatementIntegritySection">
+
+<h2>Financial Statement Integrity</h2>
+<div class="statement-controls">
+<label>From Date<input id="financialIntegrityFromDate" type="date"/></label>
+<label>To Date<input id="financialIntegrityToDate" type="date"/></label>
+<button id="runFinancialIntegrityCheck" type="button">Run Financial Integrity Check</button>
+</div>
+<div id="financialStatementIntegrityResult">
+<p>Select a reporting period and run the integrity check.</p>
+</div>
+</section>
+
+
+<section class="app-section" id="accountingControlCenterSection">
+
+<h2>Accounting Control Center</h2>
+<p>Run all major accounting reconciliations for a reporting period.</p>
+<div class="statement-controls">
+<label>From Date<input id="controlCenterFromDate" type="date"/></label>
+<label>To Date<input id="controlCenterToDate" type="date"/></label>
+<button id="runAccountingControlCenter" type="button">Run Accounting Controls</button>
+</div>
+<div id="accountingControlCenterResult">
+<p>Select a reporting period and run the accounting controls.</p>
+</div>
+</section>
+
+
+<section class="app-section" id="accountingPeriodSection">
+
+<h2>Accounting Period Control</h2>
+<label>Accounting Period<input id="accountingPeriod" type="month"/></label>
+<label>Description<input id="periodDescription" placeholder="Example: September 2026" type="text"/></label>
+<label>Reason<input id="periodReason" placeholder="Reason for closing or reopening" type="text"/></label>
+<div>
+<button id="openAccountingPeriod" type="button">Open Period</button>
+    <span>
+     Period closing is performed through the validated Period Close section below.
+    </span>
+<button id="reopenAccountingPeriod" type="button">Reopen Period</button>
+<button id="refreshAccountingPeriods" type="button">Refresh</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Period</th>
+            <th>Status</th>
+            <th>Closed At</th>
+            <th>Closed By</th>
+            <th>Close Reason</th>
+            <th>Reopen Reason</th>
+        </tr>
+    </thead>
+    <tbody id="accountingPeriodsBody"></tbody>
+</table>
+</section>
+
+<section class="app-section" id="periodCloseSection">
+
+<h2>Period Close</h2>
+<div class="statement-controls">
+<label>Start Date<input id="periodCloseStartDate" type="date"/></label>
+<label>End Date<input id="periodCloseEndDate" type="date"/></label>
+<button id="validatePeriodClose" type="button">Validate Period</button>
+<button disabled="" id="closeAccountingPeriod" type="button">Close Accounting Period</button>
+</div>
+<div id="periodCloseValidationResult">
+<p>Validate the period before closing it.</p>
+</div>
+</section>
+
+</div>
+
+<nav aria-label="Quick navigation" class="mobile-nav">
+    <button data-section="dashboardSection" type="button"><span class="mobile-icon"></span><span>Home</span></button>
+    <button data-section="transactionSection" type="button"><span class="mobile-icon"></span><span>New</span></button>
+    <button data-section="journalSection" type="button"><span class="mobile-icon"></span><span>Journal</span></button>
+    <button data-section="financialStatementsSection" type="button"><span class="mobile-icon"></span><span>Reports</span></button>
+</nav>
+
+</main>
+
+</div>
+
+<script src="./js/transactionForm.js" type="module"></script>
+<script src="./js/partiesTable.js" type="module"></script>
+<script src="./js/receivablesPayablesTable.js" type="module"></script>
+<script src="./js/invoiceBalanceTable.js" type="module"></script>
+<script src="./js/arApAgingTable.js" type="module"></script>
+<script src="./js/companyAgingTable.js" type="module"></script>
+<script src="./js/arApReconciliationTable.js" type="module"></script>
+<script src="./js/arApExceptionTable.js" type="module"></script>
+<script src="./js/settlementForm.js" type="module"></script>
+<script src="./js/multiSettlementForm.js" type="module"></script>
+<script src="./js/paymentAllocationTable.js" type="module"></script>
+<script src="./js/unallocatedTable.js" type="module"></script>
+<script src="./js/creditApplicationTable.js" type="module"></script>
+<script src="./js/allocationMigrationTable.js" type="module"></script>
+<script src="./js/partyStatementsTable.js" type="module"></script>
+<script src="./js/journalTable.js" type="module"></script>
+<script src="./js/assetTable.js" type="module"></script>
+<script src="./js/depreciationSchedule.js" type="module"></script>
+<script src="./js/ledgerTable.js" type="module"></script>
+<script src="./js/trialBalanceTable.js" type="module"></script>
+<script src="./js/incomeStatementTable.js" type="module"></script>
+<script src="./js/balanceSheetTable.js" type="module"></script>
+<script src="./js/cashFlowTable.js" type="module"></script>
+<script src="./js/financialStatementsTable.js" type="module"></script>
+<script src="./js/dashboardTable.js" type="module"></script>
+<script src="./js/openingBalanceTable.js" type="module"></script>
+<script src="./js/auditLogTable.js" type="module"></script>
+<script src="./js/reversalTable.js" type="module"></script>
+<script src="./js/accountingIntegrityTable.js" type="module"></script>
+<script src="./js/financialStatementIntegrityTable.js" type="module"></script>
+<script src="./js/accountingControlCenterTable.js" type="module"></script>
+<script src="./js/accountingPeriodTable.js" type="module"></script>
+<script src="./js/periodCloseTable.js" type="module"></script>
+
+<script>
+(function(){
+ const buttons=[...document.querySelectorAll('[data-section]')];
+ const sections=[...document.querySelectorAll('.app-section')];
+ const title=document.getElementById('currentSectionTitle');
+ const sidebar=document.getElementById('appSidebar');
+ const overlay=document.getElementById('sidebarOverlay');
+ const menu=document.getElementById('menuToggle');
+ const names={};
+ sections.forEach(s=>{const h=s.querySelector('h1,h2,h3'); if(h) names[s.id]=h.textContent.trim();});
+ function activate(id,updateHash=true){
+   const target=document.getElementById(id); if(!target) return;
+   sections.forEach(s=>s.classList.toggle('active',s===target));
+   buttons.forEach(b=>b.classList.toggle('active',b.dataset.section===id));
+   if(title) title.textContent=names[id]||'Accounting System';
+   if(updateHash) history.replaceState(null,'','#'+id);
+   sidebar?.classList.remove('open'); overlay?.classList.remove('show');
+   window.scrollTo({top:0,behavior:'smooth'});
+ }
+
+ buttons.forEach(b=>b.addEventListener('click',()=>activate(b.dataset.section)));
+ menu?.addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('show')});
+ overlay?.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('show')});
+ const initial=location.hash.slice(1); activate(document.getElementById(initial)?initial:'dashboardSection',false);
+ window.addEventListener('hashchange',()=>activate(location.hash.slice(1),false));
+ window.addEventListener('beforeprint',()=>document.body.classList.add('printing'));
+ window.addEventListener('afterprint',()=>document.body.classList.remove('printing'));
+})();
+</script>
+
+</body>
+</html>

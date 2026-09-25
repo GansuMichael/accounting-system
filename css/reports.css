@@ -1,0 +1,150 @@
+.financial-report {
+    width: 100%;
+}
+
+.financial-report-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.financial-statement {
+    margin-bottom: 40px;
+    page-break-inside: avoid;
+}
+
+.financial-statement h2 {
+    margin-bottom: 15px;
+}
+
+.financial-statement h3 {
+    margin-top: 20px;
+}
+
+.statement-total {
+    font-weight: bold;
+}
+
+.statement-grand-total {
+    font-weight: bold;
+    border-top: 2px solid #000;
+}
+
+.statement-controls {
+    display: flex;
+    gap: 15px;
+    align-items: end;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.statement-controls label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.statement-controls input {
+    padding: 8px;
+}
+
+.statement-controls button {
+    padding: 9px 15px;
+    cursor: pointer;
+}
+
+
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    #financialReport,
+    #financialReport * {
+        visibility: visible;
+    }
+
+    #financialReport {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    .statement-controls {
+        display: none;
+    }
+
+    .financial-statement {
+        page-break-inside: avoid;
+    }
+
+    .financial-table {
+        width: 100%;
+    }
+}
+
+#cashFlowSection {
+    margin-top: 30px;
+}
+
+.cash-flow-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.cash-flow-summary h3 {
+    margin-bottom: 5px;
+}
+
+.cash-flow-summary p {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.reconciled {
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid #198754;
+    background: #e9f7ef;
+}
+
+.not-reconciled {
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid #dc3545;
+    background: #fdecec;
+}
+
+.financial-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+.financial-table th,
+.financial-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.financial-table th {
+    font-weight: bold;
+}
+
+@media (max-width: 800px) {
+
+    .cash-flow-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .cash-flow-summary {
+        grid-template-columns: 1fr;
+    }
+}

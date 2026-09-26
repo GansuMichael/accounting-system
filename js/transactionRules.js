@@ -104,6 +104,19 @@ const transactionRules = {
         ]
     },
 
+    customer_deposit_fulfillment: {
+        label: "Customer Deposit Fulfillment",
+
+        debitAccounts: [
+           "2030"
+        ],
+
+        creditAccounts: [
+            "4010",
+            "4020"
+        ]
+    },
+
     loan_received: {
         label: "Loan Received",
 

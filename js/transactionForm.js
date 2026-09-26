@@ -138,6 +138,15 @@ const drawingPaymentAccountGroup =
         "drawingPaymentAccountGroup"
     );
 
+const costOfGoodsSold = 
+    document.getElementById(
+        "costOfGoodsSold"
+    );
+const costOfGoodsSoldGroup = 
+    document.getElementById(
+        "costOfGoodsSoldGroup"
+    );
+
 // ------------------------------------
 // EDITING
 // ------------------------------------
@@ -351,21 +360,19 @@ function updateFormFields() {
         }
     }
 
-
     // --------------------------------
     // CUSTOMER PAYMENT
     // --------------------------------
-
+    
     if (
-        type === "customer_payment"
+        type === "customer_payment" ||
+        type === "customer_deposit_fulfillment"
     ) {
-
+    
         if (customerGroup) {
             customerGroup.style.display = "";
         }
-    }
-
-
+    }    
     // --------------------------------
     // INVENTORY PURCHASE ON CREDIT
     // --------------------------------
@@ -414,6 +421,20 @@ function updateFormFields() {
 
         if (supplierGroup) {
             supplierGroup.style.display = "";
+        }
+    }
+
+    if (type === "customer_deposit_fulfillment") {
+        if (costOfGoodsSoldGroup) {
+            costOfGoodsSoldGroup.style.display = "";
+        }
+    } else {
+        if (costOfGoodsSoldGroup) {
+            costOfGoodsSoldGroup.style.display = "none";
+        }
+    
+        if (costOfGoodsSold) {
+            costOfGoodsSold.value = "";
         }
     }
 }
@@ -513,6 +534,37 @@ form.addEventListener(
             // --------------------------------
             // BASIC VALIDATION
             // --------------------------------
+
+            let additionalLines = [];
+
+            if (type === "customer_deposit_fulfillment") {
+                const cogsAmount = Number(costOfGoodsSold.value || 0);
+
+                if (cogsAmount < 0) {
+                    throw new Error("Cost of Goods Sold cannot be negative.");
+                }
+
+                if (cogsAmount > Number(amount.value)) {
+                    throw new Error(
+                        "Cost of Goods Sold cannot be greater than the transaction amount."
+                    );
+                }
+
+                if (cogsAmount > 0) {
+                    additionalLines = [
+                        {
+                            accountCode: "5010",
+                            debit: cogsAmount,
+                            credit: 0
+                        },
+                        {
+                            accountCode: "1040",
+                            debit: 0,
+                            credit: cogsAmount
+                        }
+                    ];
+                }
+            }
 
             if (!type) {
                 throw new Error(
@@ -639,20 +691,20 @@ form.addEventListener(
                     dueDate.value;
             }
 
-
             if (
-                type === "customer_payment"
+                type === "customer_payment" ||
+                type === "customer_deposit_fulfillment"
             ) {
-
+            
                 if (!customer.value) {
                     throw new Error(
                         "Select the customer."
                     );
                 }
-
+            
                 metadata.customerId =
                     customer.value;
-            }
+            }            
 
 
             // --------------------------------
@@ -750,7 +802,9 @@ form.addEventListener(
 
                     metadata,
 
-                    type
+                    type,
+
+                    additionalLines
 
                 });
 

@@ -19,10 +19,6 @@ import {
 // GENERIC JOURNAL TRANSACTION
 // ------------------------------------
 
-// ------------------------------------
-// GENERIC JOURNAL TRANSACTION
-// ------------------------------------
-
 export function createJournalTransaction({
     date,
     description,
@@ -31,26 +27,19 @@ export function createJournalTransaction({
     creditAccount,
     reference = "",
     metadata = {},
-    type = "journal",
-    additionalLines = []
+    type = "journal"
 }) {
-
     validateTransactionDate(date);
 
     if (!date) {
-        throw new Error(
-            "Transaction date is required."
-        );
+        throw new Error("Transaction date is required.");
     }
 
     if (!description) {
-        throw new Error(
-            "Transaction description is required."
-        );
+        throw new Error("Transaction description is required.");
     }
 
-    const transactionAmount =
-        Number(amount);
+    const transactionAmount = Number(amount);
 
     if (
         !Number.isFinite(transactionAmount) ||
@@ -79,11 +68,8 @@ export function createJournalTransaction({
         );
     }
 
-    const debit =
-        getAccountByCode(debitAccount);
-
-    const credit =
-        getAccountByCode(creditAccount);
+    const debit = getAccountByCode(debitAccount);
+    const credit = getAccountByCode(creditAccount);
 
     if (!debit) {
         throw new Error(
@@ -97,211 +83,52 @@ export function createJournalTransaction({
         );
     }
 
-    // ------------------------------------
-    // VALIDATE ADDITIONAL LINES
-    // ------------------------------------
-
-    if (!Array.isArray(additionalLines)) {
-        throw new Error(
-            "Additional journal lines must be an array."
-        );
-    }
-
-    const extraLines =
-        additionalLines.map(line => {
-
-            if (!line.accountCode) {
-                throw new Error(
-                    "Every additional journal line requires an account code."
-                );
-            }
-
-            const account =
-                getAccountByCode(
-                    line.accountCode
-                );
-
-            if (!account) {
-                throw new Error(
-                    `Account ${line.accountCode} does not exist.`
-                );
-            }
-
-            const lineDebit =
-                Number(line.debit || 0);
-
-            const lineCredit =
-                Number(line.credit || 0);
-
-            if (
-                lineDebit < 0 ||
-                lineCredit < 0
-            ) {
-                throw new Error(
-                    "Journal amounts cannot be negative."
-                );
-            }
-
-            if (
-                lineDebit > 0 &&
-                lineCredit > 0
-            ) {
-                throw new Error(
-                    "A journal line cannot contain both debit and credit."
-                );
-            }
-
-            if (
-                lineDebit === 0 &&
-                lineCredit === 0
-            ) {
-                throw new Error(
-                    `Journal line for ${account.code} must have a debit or credit amount.`
-                );
-            }
-
-            return {
-                accountCode:
-                    account.code,
-
-                accountName:
-                    account.name,
-
-                debit:
-                    lineDebit,
-
-                credit:
-                    lineCredit
-            };
-        });
-
-
-    // ------------------------------------
-    // BUILD JOURNAL LINES
-    // ------------------------------------
-
-    const lines = [
-
-        {
-            accountCode:
-                debit.code,
-
-            accountName:
-                debit.name,
-
-            debit:
-                transactionAmount,
-
-            credit: 0
-        },
-
-        {
-            accountCode:
-                credit.code,
-
-            accountName:
-                credit.name,
-
-            debit: 0,
-
-            credit:
-                transactionAmount
-        },
-
-        ...extraLines
-
-    ];
-
-
-    // ------------------------------------
-    // VERIFY JOURNAL BALANCES
-    // ------------------------------------
-
-    const totalDebit =
-        lines.reduce(
-            (total, line) =>
-                total + Number(line.debit || 0),
-            0
-        );
-
-    const totalCredit =
-        lines.reduce(
-            (total, line) =>
-                total + Number(line.credit || 0),
-            0
-        );
-
-    if (
-        Math.abs(totalDebit - totalCredit) >
-        0.000001
-    ) {
-        throw new Error(
-            `Journal is not balanced. Debit: ${totalDebit}, Credit: ${totalCredit}.`
-        );
-    }
-
-
-    // ------------------------------------
-    // ACCOUNTING PERIOD
-    // ------------------------------------
-
     ensurePeriodOpen(date);
 
+    const journalEntry = createJournalEntry({
+        date,
 
-    // ------------------------------------
-    // CREATE JOURNAL ENTRY
-    // ------------------------------------
+        description,
 
-    const journalEntry =
-        createJournalEntry({
+        reference:
+            reference ||
+            `JRN-${Date.now()}`,
 
-            date,
+        lines: [
+            {
+                accountCode: debit.code,
+                accountName: debit.name,
+                debit: transactionAmount,
+                credit: 0
+            },
 
-            description,
-
-            reference:
-                reference ||
-                `JRN-${Date.now()}`,
-
-            lines
-
-        });
-
-
-    // ------------------------------------
-    // RETURN TRANSACTION
-    // ------------------------------------
+            {
+                accountCode: credit.code,
+                accountName: credit.name,
+                debit: 0,
+                credit: transactionAmount
+            }
+        ]
+    });
 
     return {
-
         ...journalEntry,
 
         type,
 
-        amount:
-            transactionAmount,
+        amount: transactionAmount,
 
-        debitAccount:
-            debit.code,
+        debitAccount: debit.code,
+        debitAccountName: debit.name,
 
-        debitAccountName:
-            debit.name,
-
-        creditAccount:
-            credit.code,
-
-        creditAccountName:
-            credit.name,
+        creditAccount: credit.code,
+        creditAccountName: credit.name,
 
         reference:
             reference ||
             journalEntry.reference,
 
-        metadata,
-
-        additionalLines:
-            extraLines
-
+        metadata
     };
 }
 // ------------------------------------

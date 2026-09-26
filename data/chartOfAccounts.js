@@ -172,7 +172,7 @@ export const chartOfAccounts = [
     // =====================
 
     {
-        code: "4001",
+        code: "4010",
         name: "Sales Revenue",
         type: "Revenue",
         normalBalance: "Credit",

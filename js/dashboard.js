@@ -15,7 +15,9 @@ import {
 } from "./balanceSheet.js";
 
 import {
-    getCashFlowStatement
+    getCashFlowStatement,
+    getOpeningCashBalance,
+    getCashBalance
 } from "./cashFlowStatement.js";
 
 import {
@@ -184,6 +186,20 @@ export function getDashboard({
             endDate
         });
 
+    const openingCash =
+        getOpeningCashBalance(
+            startDate
+        );
+    
+    
+    const closingCash =
+        getCashBalance(
+            endDate
+        );
+
+    const netCashFlow =
+        closingCash - openingCash;
+
     const revenue =
         Number(
             incomeStatement.totalRevenue || 0
@@ -198,19 +214,6 @@ export function getDashboard({
         Number(
             incomeStatement.netProfit || 0
         );
-
-    const openingCash =
-        Number(
-            cashFlowStatement.openingCash || 0
-        );
-    
-    const closingCash =
-        Number(
-            cashFlowStatement.closingCash || 0
-        );
-    
-    const netCashFlow =
-        closingCash - openingCash;
 
 
     const receivableAging =
@@ -394,6 +397,8 @@ const netReceivablePosition =
             netProfit,
             profitMargin
         },
+
+        cashFlowStatement,
 
         cashFlow: {
             openingCash,

@@ -760,76 +760,85 @@ function getAssetName(code) {
 // ACCOUNT NAME
 // ------------------------------------
 
+//function getAccountName(code) {
+
+   // const names = {
+
+   //     "1010":
+    //        "Cash",
+
+ //       "1020":
+  //          "Bank",
+
+  //      "1030":
+  //          "Accounts Receivable",
+
+  //      "1040":
+  //          "Inventory",
+
+   //     "1500":
+ //           "Machinery",
+
+  //      "1510":
+  //          "Vehicles",
+
+ //       "1520":
+  //          "Buildings",
+
+  //      "2010":
+   //         "Accounts Payable",
+
+  //      "2020":
+  //          "Loans Payable",
+
+  //      "2030":
+ //           "Deferred Revenue",
+
+ //       "3000":
+ //           "Owner's Capital",
+
+ //       "3020":
+ //           "Retained Earnings",
+
+ //       "4010":
+ //           "Sales Revenue",
+
+ //       "4020":
+ //           "Service Revenue",
+
+  //      "5010":
+  //          "Feed Expense",
+
+ //       "5020":
+ //           "Salary Expense",
+
+ //       "5030":
+ //           "Rent Expense",
+
+ //       "5040":
+  //          "Utilities Expense",
+
+  //      "5050":
+ //           "Depreciation Expense",
+
+  //      "5060":
+   //         "Transport Expense",
+
+   //     "5070":
+  //          "Other Expenses"
+
+ //   };
+
+
+//    return names[code] || null;
+
+//}
+
 function getAccountName(code) {
 
-    const names = {
+    const account = getAccountByCode(code);
 
-        "1010":
-            "Cash",
-
-        "1020":
-            "Bank",
-
-        "1030":
-            "Accounts Receivable",
-
-        "1040":
-            "Inventory",
-
-        "1500":
-            "Machinery",
-
-        "1510":
-            "Vehicles",
-
-        "1520":
-            "Buildings",
-
-        "2010":
-            "Accounts Payable",
-
-        "2020":
-            "Loans Payable",
-
-        "2030":
-            "Deferred Revenue",
-
-        "3000":
-            "Owner's Capital",
-
-        "3020":
-            "Retained Earnings",
-
-        "4010":
-            "Sales Revenue",
-
-        "4020":
-            "Service Revenue",
-
-        "5010":
-            "Feed Expense",
-
-        "5020":
-            "Salary Expense",
-
-        "5030":
-            "Rent Expense",
-
-        "5040":
-            "Utilities Expense",
-
-        "5050":
-            "Depreciation Expense",
-
-        "5060":
-            "Transport Expense",
-
-        "5070":
-            "Other Expenses"
-
-    };
-
-
-    return names[code] || null;
-
+    return account
+        ? account.name
+        : null;
 }

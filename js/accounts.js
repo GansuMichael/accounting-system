@@ -123,8 +123,88 @@ export const accounts = [
         type: "expense"
     },
     {
+        code: "1004",
+        name: "Finished Feed Inventory",
+        type: "asset"
+    },
+    {
+        code: "1005",
+        name: "Equipment",
+        type: "asset"
+    },
+    {
+        code: "1007",
+        name: "Raw Material Inventory",
+        type: "asset"
+    },
+    {
+        code: "1008",
+        name: "Work In Progress",
+        type: "asset"
+    },
+    {
+        code: "2003",
+        name: "Wages Payable",
+        type: "liability"
+    },
+    {
+        code: "3002",
+        name: "Additional Capital",
+        type: "equity"
+    },
+    {
+        code: "5005",
+        name: "Admin Expenses",
+        type: "expense"
+    },
+    {
+        code: "5006",
+        name: "Marketing Expenses",
+        type: "expense"
+    },
+    {
+        code: "5007",
+        name: "Internet Expenses",
+        type: "expense"
+    },
+    {
+        code: "5008",
+        name: "Office Rent",
+        type: "expense"
+    },
+    {
+        code: "5009",
+        name: "Bank Charges",
+        type: "expense"
+    },
+    {
+        code: "5003",
+        name: "Fuel Expenses",
+        type: "expense"
+    },
+    {
+        code: "5013",
+        name: "Office Supplies",
+        type: "expense"
+    },
+    {
+        code: "5014",
+        name: "Manufacturing Overhead",
+        type: "expense"
+    },
+    {
+        code: "5012",
+        name: "Office Generator",
+        type: "expense"
+    },
+    {
         code: "5070",
         name: "Other Expenses",
+        type: "expense"
+    },
+    {
+        code: "5080",
+        name: "Cost of Goods Sold",
         type: "expense"
     }
 ];

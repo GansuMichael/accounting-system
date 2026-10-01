@@ -7,7 +7,7 @@ export const chartOfAccounts = [
     // =====================
 
     {
-        code: "1001",
+        code: "1010",
         name: "Cash",
         type: "Asset",
         category: "Current Asset",
@@ -16,7 +16,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "1002",
+        code: "1020",
         name: "Bank",
         type: "Asset",
         normalBalance: "Debit",
@@ -48,7 +48,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "1006",
+        code: "1590",
         name: "Accumulated Depreciation",
         type: "Contra Asset",
         normalBalance: "Credit",
@@ -92,7 +92,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "2002",
+        code: "2020",
         name: "Loan Payable",
         type: "Liability",
         normalBalance: "Credit",
@@ -120,7 +120,7 @@ export const chartOfAccounts = [
     // =====================
 
     {
-        code: "3001",
+        code: "3000",
         name: "Owner Capital",
         type: "Equity",
         normalBalance: "Credit",
@@ -136,7 +136,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "3003",
+        code: "3030",
         name: "Owner Drawings / Dividends",
         type: "Equity",
         normalBalance: "Debit",
@@ -144,7 +144,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "3004",
+        code: "3020",
         name: "Retained Earnings",
         type: "Equity",
         normalBalance: "Credit",
@@ -180,8 +180,8 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "4002",
-        name: "Consulting Revenue",
+        code: "4020",
+        name: "Service Revenue",
         type: "Revenue",
         normalBalance: "Credit",
         cashFlowCategory: "Operating"
@@ -192,7 +192,7 @@ export const chartOfAccounts = [
     // =====================
 
     {
-        code: "5001",
+        code: "5020",
         name: "Salary Expense",
         type: "Expense",
         normalBalance: "Debit",
@@ -201,7 +201,7 @@ export const chartOfAccounts = [
 
 
     {
-        code: "5002",
+        code: "5080",
         name: "Cost of Good sold",
         type: "Expense",
         normalBalance: "Debit",
@@ -217,7 +217,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "5004",
+        code: "5050",
         name: "Depreciation Expense",
         type: "Expense",
         normalBalance: "Debit",
@@ -257,7 +257,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "5009",
+        code: "5060",
         name: "Transportation Expense",
         type: "Expense",
         normalBalance: "Debit",
@@ -265,7 +265,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "5010",
+        code: "5009",
         name: "Bank Charges Expense",
         type: "Expense",
         normalBalance: "Debit",
@@ -273,7 +273,7 @@ export const chartOfAccounts = [
     },
 
     {
-        code: "5011",
+        code: "5040",
         name: "Utility Expense",
         type: "Expense",
         normalBalance: "Debit",

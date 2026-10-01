@@ -385,79 +385,7 @@ REFRESH DASHBOARD
 ==================================================
 */
 
-export function refreshDashboard() {
 
-    try {
-
-        const startDate =
-            fromDate.value;
-
-        const endDate =
-            toDate.value;
-
-
-        if (!startDate) {
-            throw new Error(
-                "Dashboard start date is required."
-            );
-        }
-
-        if (!endDate) {
-            throw new Error(
-                "Dashboard end date is required."
-            );
-        }
-
-        if (startDate > endDate) {
-            throw new Error(
-                "Dashboard start date cannot be after end date."
-            );
-        }
-
-
-        const dashboard =
-            getDashboard({
-                startDate,
-                endDate
-            });
-
-
-        updateFinancialPosition(
-            dashboard.financialPosition
-        );
-
-        updateWorkingCapital(
-            dashboard.workingCapital,
-            dashboard.financialPosition
-        );
-
-        updatePerformance(
-            dashboard.performance
-        );
-
-        updateCashFlow(
-            dashboard.cashFlow
-        );
-
-        updateReceivablesPayables(
-            dashboard.receivablesPayables
-        );
-
-        updateAgingBreakdown(
-            dashboard.receivablesPayables
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Dashboard error:",
-            error
-        );
-
-        alert(error.message);
-    }
-}
 
 function updateAgingBreakdown(receivablesPayables) {
     const receivableAging =
@@ -674,6 +602,84 @@ function updateReceivablesPayables(
     }
 
 }
+
+
+export function refreshDashboard() {
+
+    try {
+
+        const startDate =
+            fromDate.value;
+
+        const endDate =
+            toDate.value;
+
+
+        if (!startDate) {
+            throw new Error(
+                "Dashboard start date is required."
+            );
+        }
+
+        if (!endDate) {
+            throw new Error(
+                "Dashboard end date is required."
+            );
+        }
+
+        if (startDate > endDate) {
+            throw new Error(
+                "Dashboard start date cannot be after end date."
+            );
+        }
+
+
+        const dashboard =
+            getDashboard({
+                startDate,
+                endDate
+            });
+
+            
+
+        updateFinancialPosition(
+            dashboard.financialPosition
+        );
+
+        updateWorkingCapital(
+            dashboard.workingCapital,
+            dashboard.financialPosition
+        );
+
+        updatePerformance(
+            dashboard.performance
+        );
+
+        updateCashFlow(
+            dashboard.cashFlow
+        );
+
+        updateReceivablesPayables(
+            dashboard.receivablesPayables
+        );
+
+        updateAgingBreakdown(
+            dashboard.receivablesPayables
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Dashboard error:",
+            error
+        );
+
+        alert(error.message);
+    }
+}
+
+
 /*
 ==================================================
 EVENTS

@@ -272,10 +272,7 @@ function renderBalanceSheet(
                     0
                 )
                 : 0;
-                return (
-                    equityTotal +
-                    statement.currentYearProfitIncluded
-                );
+
 
 
     return `
@@ -390,7 +387,7 @@ function renderBalanceSheet(
                         <td>
                             <strong>
                             ${formatCurrency(
-                                totalEquity
+                                totalEquity + statement.currentYearProfitIncluded
                             )}
                             </strong>
                         </td>

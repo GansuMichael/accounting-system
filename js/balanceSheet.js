@@ -225,41 +225,46 @@ export function calculateTotalAssets(balanceSheet) {
 /**
  * Calculate total liabilities.
  */
+/**
+ * Calculate total liabilities.
+ *
+ * Internal account balances use:
+ * debit - credit
+ *
+ * Liabilities normally have credit balances,
+ * so they are reversed for Balance Sheet presentation.
+ */
 export function calculateTotalLiabilities(balanceSheet) {
 
     return Object.values(balanceSheet.liabilities)
         .reduce(
             (total, account) =>
-                total + account.balance,
+                total - account.balance,
             0
         );
 }
 
-
 /**
  * Calculate total equity.
  *
- * Owner's Drawings is a contra-equity account.
- * Its debit balance reduces owner's equity.
+ * Internal account balances use:
+ * debit - credit
+ *
+ * Equity normally has credit balances,
+ * so they are reversed for Balance Sheet presentation.
+ *
+ * Owner's Drawings (3030) is a debit-balance
+ * contra-equity account, so it reduces equity.
  */
 export function calculateTotalEquity(balanceSheet) {
 
     const equityTotal =
         Object.values(balanceSheet.equity)
-            .reduce((total, account) => {
-
-                // Owner's Drawings = 3030
-                if (account.code === "3030") {
-
-                    return total - Math.abs(
-                        account.balance
-                    );
-                }
-
-                return total + account.balance;
-
-            }, 0);
-
+            .reduce(
+                (total, account) =>
+                    total - account.balance,
+                0
+            );
 
     return (
         equityTotal +

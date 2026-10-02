@@ -8,7 +8,7 @@ import {
 } from "./accounts.js";
 
 import {
-    createJournalTransaction
+    createRuleBasedTransaction
 } from "./transactionEngine.js";
 
 import {
@@ -780,8 +780,8 @@ form.addEventListener(
             // CREATE JOURNAL TRANSACTION
             // --------------------------------
 
-            const transaction =
-                createJournalTransaction({
+                const transaction =
+                    createRuleBasedTransaction({
 
                     date,
 

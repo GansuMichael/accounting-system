@@ -1,4 +1,8 @@
 // js/transactionEngine.js
+import {
+    getTransactionRule
+} from "./transactionRules.js";
+
 import { getAccountByCode } from "./accounts.js";
 
 import { createJournalEntry } from "./journal.js";
@@ -841,4 +845,146 @@ function getAccountName(code) {
     return account
         ? account.name
         : null;
+}
+
+// ------------------------------------
+// RULE-BASED TRANSACTION
+// ------------------------------------
+
+export function createRuleBasedTransaction({
+    type,
+    date,
+    description,
+    amount,
+    debitAccount,
+    creditAccount,
+    reference = "",
+    metadata = {},
+    additionalLines = []
+}) {
+
+    // ------------------------------------
+    // GET TRANSACTION RULE
+    // ------------------------------------
+
+    const rule = getTransactionRule(type);
+
+    if (!rule) {
+        throw new Error(
+            `Transaction rule "${type}" does not exist.`
+        );
+    }
+
+
+    // ------------------------------------
+    // VALIDATE DEBIT ACCOUNT
+    // ------------------------------------
+
+    if (
+        !rule.debitAccounts.includes(
+            debitAccount
+        )
+    ) {
+        throw new Error(
+            `Account ${debitAccount} is not allowed as a debit account for ${rule.label}.`
+        );
+    }
+
+
+    // ------------------------------------
+    // VALIDATE CREDIT ACCOUNT
+    // ------------------------------------
+
+    if (
+        !rule.creditAccounts.includes(
+            creditAccount
+        )
+    ) {
+        throw new Error(
+            `Account ${creditAccount} is not allowed as a credit account for ${rule.label}.`
+        );
+    }
+
+
+    // ------------------------------------
+    // VALIDATE ADDITIONAL LINES
+    // ------------------------------------
+
+    if (!Array.isArray(additionalLines)) {
+        throw new Error(
+            "Additional journal lines must be an array."
+        );
+    }
+
+    for (const line of additionalLines) {
+
+        const accountCode =
+            line.accountCode;
+
+        if (!accountCode) {
+            throw new Error(
+                "Additional journal line requires an account code."
+            );
+        }
+
+        const isDebit =
+            Number(line.debit || 0) > 0;
+
+        const isCredit =
+            Number(line.credit || 0) > 0;
+
+
+        if (isDebit) {
+
+            if (
+                !rule.debitAccounts.includes(
+                    accountCode
+                )
+            ) {
+                throw new Error(
+                    `Account ${accountCode} is not allowed as a debit account for ${rule.label}.`
+                );
+            }
+        }
+
+
+        if (isCredit) {
+
+            if (
+                !rule.creditAccounts.includes(
+                    accountCode
+                )
+            ) {
+                throw new Error(
+                    `Account ${accountCode} is not allowed as a credit account for ${rule.label}.`
+                );
+            }
+        }
+    }
+
+
+    // ------------------------------------
+    // CREATE JOURNAL TRANSACTION
+    // ------------------------------------
+
+    return createJournalTransaction({
+
+        date,
+
+        description,
+
+        amount,
+
+        debitAccount,
+
+        creditAccount,
+
+        reference,
+
+        metadata,
+
+        type,
+
+        additionalLines
+    });
 }

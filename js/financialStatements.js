@@ -154,10 +154,23 @@ export function generateFinancialStatements({
         );
 
 
-    const totalEquity =
+    const balanceSheetEquity =
         calculateTotalEquity(
             balanceSheet
         );
+
+
+    // Current-period profit belongs to equity.
+    // It should not be added to assets directly.
+    const currentYearProfitIncluded =
+        Number(
+            incomeStatement.netProfit || 0
+        );
+
+
+    const totalEquity =
+        balanceSheetEquity +
+        currentYearProfitIncluded;
 
     const statementOfEquity =
         getStatementOfEquity({
@@ -198,6 +211,8 @@ export function generateFinancialStatements({
 
         },
 
+        currentYearProfitIncluded,
+        
         totals: {
 
             totalAssets,

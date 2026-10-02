@@ -353,12 +353,12 @@ export function displayBalanceSheet() {
                 account.code === "3000"
             ) {
 
-                capital -=
+                capital +=
                     account.balance;
 
             } else {
 
-                retainedEarnings -=
+                retainedEarnings +=
                     account.balance;
 
             }

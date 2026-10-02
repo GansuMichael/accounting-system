@@ -256,6 +256,19 @@ export function calculateTotalLiabilities(balanceSheet) {
  * Owner's Drawings (3030) is a debit-balance
  * contra-equity account, so it reduces equity.
  */
+/**
+ * Calculate total equity.
+ *
+ * Internal account balances use:
+ * debit - credit
+ *
+ * Equity normally has credit balances,
+ * so the balance is reversed for Balance Sheet presentation.
+ *
+ * Owner's Drawings (3030) is a debit-balance
+ * contra-equity account, so reversing its balance
+ * automatically makes it reduce equity.
+ */
 export function calculateTotalEquity(balanceSheet) {
 
     const equityTotal =

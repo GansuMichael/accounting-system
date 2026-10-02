@@ -245,7 +245,7 @@ function renderBalanceSheet(
 
                 <td>
                     ${formatCurrency(
-                        account.balance
+                        -account.balance
                     )}
                 </td>
 
@@ -254,60 +254,28 @@ function renderBalanceSheet(
         `).join("");
 
 
-    const totalAssets =
-        Object.values(
-            statement.assets
-        ).reduce((total, account) => {
-
-            if (
-                account.type ===
-                "contra_asset"
-            ) {
-
-                return total -
-                    Math.abs(
-                        account.balance
-                    );
-            }
-
-            return total +
-                account.balance;
-
-        }, 0);
+        const totalAssets =
+            statement.totalAssets;
 
 
-    const totalLiabilities =
-        Object.values(
-            statement.liabilities
-        ).reduce(
-            (total, account) =>
-                total + account.balance,
-            0
-        );
+        const totalLiabilities =
+            statement.totalLiabilities;
 
 
-    const totalEquity =
-        statement.equity
-            ? Object.values(
+            const totalEquity =
                 statement.equity
-            ).reduce((total, account) => {
-
-                if (
-                    account.code ===
-                    "3030"
-                ) {
-
-                    return total -
-                        Math.abs(
-                            account.balance
-                        );
-                }
-
-                return total +
-                    account.balance;
-
-            }, 0)
-            : 0;
+                ? Object.values(
+                    statement.equity
+                ).reduce(
+                    (total, account) =>
+                        total - account.balance,
+                    0
+                )
+                : 0;
+                return (
+                    equityTotal +
+                    statement.currentYearProfitIncluded
+                );
 
 
     return `
@@ -421,10 +389,9 @@ function renderBalanceSheet(
 
                         <td>
                             <strong>
-                                ${formatCurrency(
-                                    totalEquity +
-                                    statement.currentYearProfitIncluded
-                                )}
+                            ${formatCurrency(
+                                totalEquity
+                            )}
                             </strong>
                         </td>
 
@@ -850,9 +817,23 @@ export function renderFinancialStatements({
             )}
 
 
-            ${renderBalanceSheet(
-                statements.balanceSheet
-            )}
+            ${renderBalanceSheet({
+
+                ...statements.balanceSheet,
+            
+                totalAssets:
+                    statements.totals.totalAssets,
+            
+                totalLiabilities:
+                    statements.totals.totalLiabilities,
+            
+                totalEquity:
+                    statements.totals.totalEquity,
+            
+                currentYearProfitIncluded:
+                    statements.currentYearProfitIncluded
+            
+            })}
 
 
             ${renderCashFlow(

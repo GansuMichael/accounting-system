@@ -1078,318 +1078,444 @@
 
 <section class="app-section" id="dashboardSection">
 
-    <h2>Financial Dashboard</h2>
+        <h2>Financial Dashboard</h2>
+    
+        <div class="filter-controls">
+            <label>
+                From
+                <input id="dashboardFromDate" type="date">
+            </label>
+    
+            <label>
+                To
+                <input id="dashboardToDate" type="date">
+            </label>
+    
+            <button id="refreshDashboard" type="button">
+                Refresh Dashboard
+            </button>
+        </div>
+    
+        <!-- FINANCIAL POSITION -->
+        <div class="dashboard-group">
+            <h3>Financial Position</h3>
 
-    <div class="filter-controls">
-        <label>
-            From
-            <input id="dashboardFromDate" type="date">
-        </label>
+            <div class="dashboard-carousel">
 
-        <label>
-            To
-            <input id="dashboardToDate" type="date">
-        </label>
+                    <button
+                        type="button"
+                        class="dashboard-carousel-btn dashboard-carousel-prev"
+                        aria-label="Previous Financial Position cards">
+                        ‹
+                    </button>
+    
+            <div class="dashboard-cards">
+    
+                <div class="dashboard-card">
+                    <span>Total Assets</span>
+                    <strong id="cardTotalAssets">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Total Liabilities</span>
+                    <strong id="cardTotalLiabilities">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Total Equity</span>
+                    <strong id="cardTotalEquity">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Cash & Bank</span>
+                    <strong id="cardCashBank">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Cash</span>
+                    <strong id="cardCash">0.00</strong>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span>Bank</span>
+                    <strong id="cardBank">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Accounts Receivable</span>
+                    <strong id="cardReceivables">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Inventory</span>
+                    <strong id="cardInventory">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Accounts Payable</span>
+                    <strong id="cardPayables">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Loans Payable</span>
+                    <strong id="cardLoans">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Balance Sheet Status</span>
+                    <strong id="cardBalanceSheetStatus">
+                        Checking...
+                    </strong>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span>Balance Sheet Difference</span>
+                    <strong id="cardBalanceSheetDifference">
+                        0.00
+                    </strong>
+                </div>
+    
+            </div>
 
-        <button id="refreshDashboard" type="button">
-            Refresh Dashboard
+            <button
+            type="button"
+            class="dashboard-carousel-btn dashboard-carousel-next"
+            aria-label="Next Financial Position cards">
+            ›
         </button>
-    </div>
 
-    <!-- FINANCIAL POSITION -->
+    </div>
+        </div>
+    
+    
+        <!-- WORKING CAPITAL -->
+        <div class="dashboard-group">
+            <h3>Working Capital</h3>
+
+            <div class="dashboard-carousel">
+
+                    <button
+                        type="button"
+                        class="dashboard-carousel-btn dashboard-carousel-prev"
+                        aria-label="Previous Financial Position cards">
+                        ‹
+                    </button>
+    
+            <div class="dashboard-cards">
+    
+                <div class="dashboard-card">
+                    <span>Current Assets</span>
+                    <strong id="cardCurrentAssets">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Current Liabilities</span>
+                    <strong id="cardCurrentLiabilities">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Working Capital</span>
+                    <strong id="cardWorkingCapital">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Current Ratio</span>
+                    <strong id="cardCurrentRatio">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Cash & Bank</span>
+                    <strong id="cardWorkingCash">0.00</strong>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span>Receivables</span>
+                    <strong id="cardWorkingReceivables">0.00</strong>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span>Inventory</span>
+                    <strong id="cardWorkingInventory">0.00</strong>
+                </div>
+            </div>
+
+            <button
+            type="button"
+            class="dashboard-carousel-btn dashboard-carousel-next"
+            aria-label="Next Financial Position cards">
+            ›
+        </button>
+
+    </div>
+        </div>
+    
+        <div class="dashboard-group">
+            <h3>Receivables & Payables</h3>
+
+            <div class="dashboard-carousel">
+
+                    <button
+                        type="button"
+                        class="dashboard-carousel-btn dashboard-carousel-prev"
+                        aria-label="Previous Financial Position cards">
+                        ‹
+                    </button>
+        
+            <div class="dashboard-cards">
+        
+                <div class="dashboard-card">
+                    <span>Total Receivables</span>
+                    <strong id="cardTotalReceivables">
+                        0.00
+                    </strong>
+                </div>
+        
+                <div class="dashboard-card">
+                    <span>Overdue Receivables</span>
+                    <strong id="cardOverdueReceivables">
+                        0.00
+                    </strong>
+                </div>
+        
+                <div class="dashboard-card">
+                    <span>Total Payables</span>
+                    <strong id="cardTotalPayables">
+                        0.00
+                    </strong>
+                </div>
+        
+                <div class="dashboard-card">
+                    <span>Overdue Payables</span>
+                    <strong id="cardOverduePayables">
+                        0.00
+                    </strong>
+                </div>
+        
+                <div class="dashboard-card">
+                    <span>Net Receivable Position</span>
+                    <strong id="cardNetReceivablePosition">
+                        0.00
+                    </strong>
+                </div>
+        
+            </div>
+
+            <button
+            type="button"
+            class="dashboard-carousel-btn dashboard-carousel-next"
+            aria-label="Next Financial Position cards">
+            ›
+        </button>
+
+    </div>
+        </div>
+    
+        <!-- Receivables Aging -->
     <div class="dashboard-group">
-        <h3>Financial Position</h3>
+        <h3>Receivables Aging</h3>
 
-        <div class="dashboard-cards">
+        <div class="dashboard-carousel">
 
-            <div class="dashboard-card">
-                <span>Total Assets</span>
-                <strong id="cardTotalAssets">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Total Liabilities</span>
-                <strong id="cardTotalLiabilities">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Total Equity</span>
-                <strong id="cardTotalEquity">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Cash & Bank</span>
-                <strong id="cardCashBank">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Cash</span>
-                <strong id="cardCash">0.00</strong>
-            </div>
-            
-            <div class="dashboard-card">
-                <span>Bank</span>
-                <strong id="cardBank">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Accounts Receivable</span>
-                <strong id="cardReceivables">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Inventory</span>
-                <strong id="cardInventory">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Accounts Payable</span>
-                <strong id="cardPayables">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Loans Payable</span>
-                <strong id="cardLoans">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Balance Sheet Status</span>
-                <strong id="cardBalanceSheetStatus">
-                    Checking...
-                </strong>
-            </div>
-            
-            <div class="dashboard-card">
-                <span>Balance Sheet Difference</span>
-                <strong id="cardBalanceSheetDifference">
-                    0.00
-                </strong>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- WORKING CAPITAL -->
-    <div class="dashboard-group">
-        <h3>Working Capital</h3>
-
-        <div class="dashboard-cards">
-
-            <div class="dashboard-card">
-                <span>Current Assets</span>
-                <strong id="cardCurrentAssets">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Current Liabilities</span>
-                <strong id="cardCurrentLiabilities">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Working Capital</span>
-                <strong id="cardWorkingCapital">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Current Ratio</span>
-                <strong id="cardCurrentRatio">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Cash & Bank</span>
-                <strong id="cardWorkingCash">0.00</strong>
-            </div>
-            
-            <div class="dashboard-card">
-                <span>Receivables</span>
-                <strong id="cardWorkingReceivables">0.00</strong>
-            </div>
-            
-            <div class="dashboard-card">
-                <span>Inventory</span>
-                <strong id="cardWorkingInventory">0.00</strong>
-            </div>
-        </div>
-    </div>
-
-    <div class="dashboard-group">
-        <h3>Receivables & Payables</h3>
+                <button
+                    type="button"
+                    class="dashboard-carousel-btn dashboard-carousel-prev"
+                    aria-label="Previous Financial Position cards">
+                    ‹
+                </button>
     
         <div class="dashboard-cards">
-    
             <div class="dashboard-card">
-                <span>Total Receivables</span>
-                <strong id="cardTotalReceivables">
-                    0.00
-                </strong>
+                <span>Current</span>
+                <strong id="cardReceivableCurrent">0.00</strong>
             </div>
     
             <div class="dashboard-card">
-                <span>Overdue Receivables</span>
-                <strong id="cardOverdueReceivables">
-                    0.00
-                </strong>
+                <span>1–30 Days</span>
+                <strong id="cardReceivable1to30">0.00</strong>
             </div>
     
             <div class="dashboard-card">
-                <span>Total Payables</span>
-                <strong id="cardTotalPayables">
-                    0.00
-                </strong>
+                <span>31–60 Days</span>
+                <strong id="cardReceivable31to60">0.00</strong>
             </div>
     
             <div class="dashboard-card">
-                <span>Overdue Payables</span>
-                <strong id="cardOverduePayables">
-                    0.00
-                </strong>
+                <span>61–90 Days</span>
+                <strong id="cardReceivable61to90">0.00</strong>
             </div>
     
             <div class="dashboard-card">
-                <span>Net Receivable Position</span>
-                <strong id="cardNetReceivablePosition">
-                    0.00
-                </strong>
+                <span>91–120 Days</span>
+                <strong id="cardReceivable91to120">0.00</strong>
             </div>
     
-        </div>
-    </div>
-
-    <!-- Receivables Aging -->
-<div class="dashboard-group">
-    <h3>Receivables Aging</h3>
-
-    <div class="dashboard-cards">
-        <div class="dashboard-card">
-            <span>Current</span>
-            <strong id="cardReceivableCurrent">0.00</strong>
+            <div class="dashboard-card">
+                <span>120+ Days</span>
+                <strong id="cardReceivable120Plus">0.00</strong>
+            </div>
         </div>
 
-        <div class="dashboard-card">
-            <span>1–30 Days</span>
-            <strong id="cardReceivable1to30">0.00</strong>
-        </div>
+        <button
+        type="button"
+        class="dashboard-carousel-btn dashboard-carousel-next"
+        aria-label="Next Financial Position cards">
+        ›
+    </button>
 
-        <div class="dashboard-card">
-            <span>31–60 Days</span>
-            <strong id="cardReceivable31to60">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>61–90 Days</span>
-            <strong id="cardReceivable61to90">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>91–120 Days</span>
-            <strong id="cardReceivable91to120">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>120+ Days</span>
-            <strong id="cardReceivable120Plus">0.00</strong>
-        </div>
-    </div>
 </div>
-
-<!-- Payables Aging -->
-<div class="dashboard-group">
-    <h3>Payables Aging</h3>
-
-    <div class="dashboard-cards">
-        <div class="dashboard-card">
-            <span>Current</span>
-            <strong id="cardPayableCurrent">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>1–30 Days</span>
-            <strong id="cardPayable1to30">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>31–60 Days</span>
-            <strong id="cardPayable31to60">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>61–90 Days</span>
-            <strong id="cardPayable61to90">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>91–120 Days</span>
-            <strong id="cardPayable91to120">0.00</strong>
-        </div>
-
-        <div class="dashboard-card">
-            <span>120+ Days</span>
-            <strong id="cardPayable120Plus">0.00</strong>
-        </div>
     </div>
+    
+    <!-- Payables Aging -->
+    <div class="dashboard-group">
+        <h3>Payables Aging</h3>
+
+        <div class="dashboard-carousel">
+
+                <button
+                    type="button"
+                    class="dashboard-carousel-btn dashboard-carousel-prev"
+                    aria-label="Previous Financial Position cards">
+                    ‹
+                </button>
+    
+        <div class="dashboard-cards">
+            <div class="dashboard-card">
+                <span>Current</span>
+                <strong id="cardPayableCurrent">0.00</strong>
+            </div>
+    
+            <div class="dashboard-card">
+                <span>1–30 Days</span>
+                <strong id="cardPayable1to30">0.00</strong>
+            </div>
+    
+            <div class="dashboard-card">
+                <span>31–60 Days</span>
+                <strong id="cardPayable31to60">0.00</strong>
+            </div>
+    
+            <div class="dashboard-card">
+                <span>61–90 Days</span>
+                <strong id="cardPayable61to90">0.00</strong>
+            </div>
+    
+            <div class="dashboard-card">
+                <span>91–120 Days</span>
+                <strong id="cardPayable91to120">0.00</strong>
+            </div>
+    
+            <div class="dashboard-card">
+                <span>120+ Days</span>
+                <strong id="cardPayable120Plus">0.00</strong>
+            </div>
+        </div>
+
+        <button
+        type="button"
+        class="dashboard-carousel-btn dashboard-carousel-next"
+        aria-label="Next Financial Position cards">
+        ›
+    </button>
+
 </div>
-
-
-    <!-- PERFORMANCE -->
-    <div class="dashboard-group">
-        <h3>Performance</h3>
-
-        <div class="dashboard-cards">
-
-            <div class="dashboard-card">
-                <span>Revenue</span>
-                <strong id="cardRevenue">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Expenses</span>
-                <strong id="cardExpenses">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Net Profit</span>
-                <strong id="cardNetProfit">0.00</strong>
-            </div>
-
-            <div class="dashboard-card">
-                <span>Profit Margin</span>
-                <strong id="cardProfitMargin">0.00%</strong>
-            </div>
-
-        </div>
     </div>
+    
+    
+        <!-- PERFORMANCE -->
+        <div class="dashboard-group">
+            <h3>Performance</h3>
 
-    <div class="dashboard-group">
-        <h3>Cash Flow</h3>
+            <div class="dashboard-carousel">
+
+                    <button
+                        type="button"
+                        class="dashboard-carousel-btn dashboard-carousel-prev"
+                        aria-label="Previous Financial Position cards">
+                        ‹
+                    </button>
     
-        <div class="dashboard-cards">
+                <div class="dashboard-cards">
     
-            <div class="dashboard-card">
-                <span>Opening Cash</span>
-                <strong id="cardOpeningCash">
-                    0.00
-                </strong>
-            </div>
+                <div class="dashboard-card">
+                    <span>Revenue</span>
+                    <strong id="cardRevenue">0.00</strong>
+                </div>
     
-            <div class="dashboard-card">
-                <span>Net Cash Flow</span>
-                <strong id="cardNetCashFlow">
-                    0.00
-                </strong>
-            </div>
+                <div class="dashboard-card">
+                    <span>Expenses</span>
+                    <strong id="cardExpenses">0.00</strong>
+                </div>
     
-            <div class="dashboard-card">
-                <span>Closing Cash</span>
-                <strong id="cardClosingCash">
-                    0.00
-                </strong>
-            </div>
+                <div class="dashboard-card">
+                    <span>Net Profit</span>
+                    <strong id="cardNetProfit">0.00</strong>
+                </div>
+    
+                <div class="dashboard-card">
+                    <span>Profit Margin</span>
+                    <strong id="cardProfitMargin">0.00%</strong>
+                </div>
+    
+                </div>
+
+                <button
+                type="button"
+                class="dashboard-carousel-btn dashboard-carousel-next"
+                aria-label="Next Financial Position cards">
+                ›
+            </button>
     
         </div>
-    </div>
+                </div>
+    
+            <div class="dashboard-group">
+            <h3>Cash Flow</h3>
 
-</section>
+                <div class="dashboard-carousel">
+
+                    <button
+                        type="button"
+                        class="dashboard-carousel-btn dashboard-carousel-prev"
+                        aria-label="Previous Financial Position cards">
+                        ‹
+                    </button>
+        
+                    <div class="dashboard-cards">
+            
+                        <div class="dashboard-card">
+                            <span>Opening Cash</span>
+                            <strong id="cardOpeningCash">
+                                0.00
+                            </strong>
+                        </div>
+                
+                        <div class="dashboard-card">
+                            <span>Net Cash Flow</span>
+                            <strong id="cardNetCashFlow">
+                                0.00
+                            </strong>
+                        </div>
+            
+                        <div class="dashboard-card">
+                            <span>Closing Cash</span>
+                            <strong id="cardClosingCash">
+                                0.00
+                            </strong>
+                        </div>
+            
+                    </div>
+
+                    <button
+                        type="button"
+                        class="dashboard-carousel-btn dashboard-carousel-next"
+                        aria-label="Next Financial Position cards">
+                        ›
+                    </button>
+
+                </div>
+            </div>
+    
+    </section>
 
 
 <section class="app-section" id="openingBalanceSection">
@@ -1564,6 +1690,9 @@
 </main>
 
 </div>
+
+<script src="./js/dynamiccarouse1.js" type="module"></script>
+<script src="./js/dynamiccss.js" type="module"></script>
 
 <script src="./js/transactionForm.js" type="module"></script>
 <script src="./js/partiesTable.js" type="module"></script>

@@ -186,17 +186,13 @@ export function getDashboard({
             endDate
         });
 
-    const openingCash =
-        getOpeningCashBalance(
-            startDate
-        );
-    
-    
-    const closingCash =
-        getCashBalance(
-            endDate
-        );
 
+    const openingCash =
+        Number(cashFlowStatement.openingCash || 0);
+        
+    const closingCash =
+        Number(cashFlowStatement.closingCash || 0);
+        
     const netCashFlow =
         closingCash - openingCash;
 

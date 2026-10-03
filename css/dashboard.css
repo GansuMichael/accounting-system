@@ -83,37 +83,107 @@
 }
 
 
-/* ======================================
-   SLIDER SCROLLBAR
-   ====================================== */
 /* =========================================
-   DASHBOARD CARD CAROUSEL
-   ========================================= */
+   GANSU DASHBOARD SLIDE DECK
+========================================= */
 
-   .dashboard-carousel {
+.dashboard-deck {
     position: relative;
+    width: 100%;
+    min-height: 430px;
+}
+
+
+/* =========================================
+   SLIDE
+========================================= */
+
+.dashboard-slide {
+    display: none;
+
+    width: 100%;
+    min-height: 430px;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    animation: dashboardSlideIn 0.35s ease;
+}
+
+.dashboard-slide.active {
+    display: block;
+}
+
+
+/* =========================================
+   SLIDE HEADER
+========================================= */
+
+.dashboard-slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 28px;
+}
+
+.dashboard-slide-header h2 {
+    margin: 5px 0 6px;
+
+    font-size: 25px;
+    font-weight: 750;
+
+    color: #172033;
+}
+
+.dashboard-slide-header p {
+    margin: 0;
+
+    color: #64748b;
+    font-size: 14px;
+}
+
+.dashboard-slide-number {
+    display: inline-block;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   CARDS INSIDE SLIDE
+========================================= */
+
+.dashboard-slide .dashboard-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
     width: 100%;
 }
 
-.dashboard-cards {
-    display: flex;
-    gap: 18px;
 
-    overflow: hidden;
+/* =========================================
+   CARD
+========================================= */
 
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-
-    padding: 8px 4px 18px;
-}
-
-/* Each card is a slide */
-
-.dashboard-card {
+.dashboard-slide .dashboard-card {
     --dashboard-card-color: #607d8b;
 
-    flex: 0 0 240px;
-    min-width: 240px;
+    position: relative;
 
     min-height: 125px;
 
@@ -126,23 +196,21 @@
 
     border-radius: 14px;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-
-    scroll-snap-align: start;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.dashboard-card:hover {
+.dashboard-slide .dashboard-card:hover {
     transform: translateY(-4px);
 
     box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.12);
+        0 10px 24px rgba(0, 0, 0, 0.11);
 }
 
-.dashboard-card span {
+.dashboard-slide .dashboard-card span {
     display: block;
 
     margin-bottom: 12px;
@@ -153,7 +221,7 @@
     font-weight: 600;
 }
 
-.dashboard-card strong {
+.dashboard-slide .dashboard-card strong {
     display: block;
 
     color: var(--dashboard-card-color);
@@ -168,128 +236,168 @@
 
 
 /* =========================================
-   PREVIOUS / NEXT BUTTONS
-   ========================================= */
+   NAVIGATION
+========================================= */
 
-.dashboard-carousel-btn {
-    position: absolute;
-
-    top: 50%;
-
-    width: 42px;
-    height: 42px;
-
-    transform: translateY(-50%);
-
-    z-index: 10;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #ffffff;
-
-    color: #374151;
-
-    font-size: 22px;
-    font-weight: bold;
-
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.15);
-
-    cursor: pointer;
-
+.dashboard-deck-navigation {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
+    gap: 25px;
+
+    margin-top: 22px;
+}
+
+
+.dashboard-deck-btn {
+    min-width: 120px;
+
+    padding: 11px 18px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
     transition:
         background 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.dashboard-carousel-btn:hover {
-    background: #f1f5f9;
+.dashboard-deck-btn:hover:not(:disabled) {
+    background: #f8fafc;
 
-    transform:
-        translateY(-50%)
-        scale(1.08);
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.10);
 }
 
-.dashboard-carousel-btn:disabled {
+.dashboard-deck-btn:disabled {
     opacity: 0.35;
 
     cursor: not-allowed;
 }
 
-.dashboard-carousel-prev {
-    left: -16px;
-}
 
-.dashboard-carousel-next {
-    right: -16px;
-}
+/* =========================================
+   SLIDE INDICATORS
+========================================= */
 
-/* Dashboard section headings */
-
-.dashboard-group {
-    margin-bottom: 32px;
-}
-
-.dashboard-group h3 {
-    margin-bottom: 16px;
-
-    color: #263238;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-/* Date filters */
-
-.filter-controls {
+.dashboard-slide-indicators {
     display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    gap: 16px;
 
-    margin-bottom: 28px;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
 }
 
-.filter-controls label {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.dashboard-slide-indicator {
+    width: 9px;
+    height: 9px;
 
-    color: #455a64;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.filter-controls input {
-    min-height: 40px;
-    padding: 8px 12px;
-
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-}
-
-.filter-controls button {
-    min-height: 40px;
-    padding: 10px 18px;
+    padding: 0;
 
     border: none;
-    border-radius: 7px;
+    border-radius: 50%;
 
-    background: #2e7d32;
-    color: #ffffff;
+    background: #cbd5e1;
 
-    font-weight: 600;
     cursor: pointer;
+
+    transition:
+        width 0.2s ease,
+        background 0.2s ease;
 }
 
-.filter-controls button:hover {
-    background: #1b5e20;
+.dashboard-slide-indicator.active {
+    width: 25px;
+
+    border-radius: 10px;
+
+    background: #334155;
 }
 
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes dashboardSlideIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .dashboard-slide .dashboard-cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .dashboard-slide {
+        padding: 20px;
+
+        min-height: 500px;
+
+        border-radius: 15px;
+    }
+
+    .dashboard-slide-header h2 {
+        font-size: 21px;
+    }
+
+    .dashboard-slide .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-deck-navigation {
+        gap: 10px;
+    }
+
+    .dashboard-deck-btn {
+        min-width: auto;
+
+        padding: 10px 13px;
+
+        font-size: 12px;
+    }
+
+}
 /* Responsive layout */
 
 /* =========================================

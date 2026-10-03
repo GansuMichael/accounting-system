@@ -1,108 +1,201 @@
 /**
  * GANSU Accounting System
- * Dashboard Carousel
+ * Dashboard Slide Deck
  */
 
-const DashboardCarousel = (() => {
+const DashboardDeck = (() => {
 
-    const CARD_GAP = 18;
+    let currentSlide = 0;
 
-    function initializeCarousel(carousel) {
+    let slides = [];
 
-        const track =
-            carousel.querySelector(".dashboard-cards");
+    let indicators = [];
 
-        const previousButton =
-            carousel.querySelector(
-                ".dashboard-carousel-prev"
-            );
+    const previousButton =
+        document.getElementById("dashboardPrevious");
 
-        const nextButton =
-            carousel.querySelector(
-                ".dashboard-carousel-next"
-            );
+    const nextButton =
+        document.getElementById("dashboardNext");
 
-        if (!track || !previousButton || !nextButton) {
+    const indicatorContainer =
+        document.getElementById("dashboardIndicators");
+
+
+    function createIndicators() {
+
+        if (!indicatorContainer) {
             return;
         }
 
-        function getScrollAmount() {
+        indicatorContainer.innerHTML = "";
 
-            const card =
-                track.querySelector(".dashboard-card");
+        indicators = [];
 
-            if (!card) {
-                return 250;
-            }
+        slides.forEach((slide, index) => {
 
-            return card.offsetWidth + CARD_GAP;
-        }
+            const button =
+                document.createElement("button");
 
-        function updateButtons() {
+            button.type = "button";
 
-            const maxScroll =
-                track.scrollWidth - track.clientWidth;
+            button.className =
+                "dashboard-slide-indicator";
+
+            button.setAttribute(
+                "aria-label",
+                `Go to dashboard slide ${index + 1}`
+            );
+
+            button.addEventListener(
+                "click",
+                () => {
+                    showSlide(index);
+                }
+            );
+
+            indicatorContainer.appendChild(button);
+
+            indicators.push(button);
+
+        });
+
+    }
+
+
+    function updateNavigation() {
+
+        if (previousButton) {
 
             previousButton.disabled =
-                track.scrollLeft <= 1;
+                currentSlide === 0;
 
-            nextButton.disabled =
-                track.scrollLeft >= maxScroll - 1;
         }
 
-        previousButton.addEventListener(
-            "click",
-            () => {
+        if (nextButton) {
 
-                track.scrollBy({
-                    left: -getScrollAmount(),
-                    behavior: "smooth"
-                });
+            nextButton.disabled =
+                currentSlide === slides.length - 1;
 
-            }
-        );
+        }
 
-        nextButton.addEventListener(
-            "click",
-            () => {
 
-                track.scrollBy({
-                    left: getScrollAmount(),
-                    behavior: "smooth"
-                });
+        indicators.forEach(
+            (indicator, index) => {
+
+                indicator.classList.toggle(
+                    "active",
+                    index === currentSlide
+                );
 
             }
         );
 
-        track.addEventListener(
-            "scroll",
-            updateButtons
+    }
+
+
+    function showSlide(index) {
+
+        if (
+            index < 0 ||
+            index >= slides.length
+        ) {
+            return;
+        }
+
+
+        slides.forEach(
+            slide => {
+                slide.classList.remove("active");
+            }
         );
 
-        window.addEventListener(
-            "resize",
-            updateButtons
-        );
 
-        updateButtons();
+        slides[index].classList.add("active");
+
+        currentSlide = index;
+
+        updateNavigation();
+
+    }
+
+
+    function next() {
+
+        if (
+            currentSlide <
+            slides.length - 1
+        ) {
+
+            showSlide(
+                currentSlide + 1
+            );
+
+        }
+
+    }
+
+
+    function previous() {
+
+        if (currentSlide > 0) {
+
+            showSlide(
+                currentSlide - 1
+            );
+
+        }
+
     }
 
 
     function initialize() {
 
-        const carousels =
-            document.querySelectorAll(
-                ".dashboard-carousel"
+        slides =
+            Array.from(
+                document.querySelectorAll(
+                    ".dashboard-slide"
+                )
             );
 
-        carousels.forEach(
-            initializeCarousel
-        );
+
+        if (!slides.length) {
+            return;
+        }
+
+
+        createIndicators();
+
+
+        if (previousButton) {
+
+            previousButton.addEventListener(
+                "click",
+                previous
+            );
+
+        }
+
+
+        if (nextButton) {
+
+            nextButton.addEventListener(
+                "click",
+                next
+            );
+
+        }
+
+
+        showSlide(0);
+
     }
 
 
     return {
-        initialize
+        initialize,
+        next,
+        previous,
+        showSlide
     };
 
 })();
@@ -112,11 +205,11 @@ if (document.readyState === "loading") {
 
     document.addEventListener(
         "DOMContentLoaded",
-        DashboardCarousel.initialize
+        DashboardDeck.initialize
     );
 
 } else {
 
-    DashboardCarousel.initialize();
+    DashboardDeck.initialize();
 
 }

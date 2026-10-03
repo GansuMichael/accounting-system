@@ -229,33 +229,6 @@
     right: -16px;
 }
 
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 600px) {
-
-    .dashboard-card {
-        flex: 0 0 210px;
-        min-width: 210px;
-
-        padding: 18px 15px;
-    }
-
-    .dashboard-card strong {
-        font-size: 21px;
-    }
-
-    .dashboard-carousel-prev {
-        left: 4px;
-    }
-
-    .dashboard-carousel-next {
-        right: 4px;
-    }
-}
-
 /* Dashboard section headings */
 
 .dashboard-group {
@@ -319,11 +292,35 @@
 
 /* Responsive layout */
 
-/* ======================================
+/* =========================================
    MOBILE
-   ====================================== */
+   ========================================= */
 
-   @media (max-width: 600px) {
+   @media (max-width: 900px) {
+
+    .dashboard-cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    #dashboardSection .filter-controls {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+
+    #dashboardSection .filter-controls label {
+        width: 100%;
+    }
+
+    #dashboardSection .filter-controls input,
+    #refreshDashboard {
+        width: 100%;
+    }
 
     .dashboard-card {
         flex: 0 0 210px;
@@ -335,4 +332,28 @@
     .dashboard-card strong {
         font-size: 21px;
     }
+
+    .dashboard-carousel-prev {
+        left: 4px;
+    }
+
+    .dashboard-carousel-next {
+        right: 4px;
+    }
+
+    .dashboard-group {
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .dashboard-card strong {
+        font-size: 20px;
+    }
+
+    .dashboard-group h3 {
+        font-size: 16px;
+    }
+
 }
